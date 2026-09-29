@@ -68,3 +68,25 @@ leaderboard.
 
 Also test submissions that must fail: one that changes a file outside its record directory,
 and one copied from a fixture under `Fixtures/` that is expected to be rejected.
+
+## Maybe in the future: Requiring pull requests
+
+GitHub can refuse every direct push to `main`, so that each change goes through a pull
+request. The setting is a branch protection rule, or ruleset, on `main` with *Require a pull
+request before merging*, under *Settings → Branches* or *Settings → Rules → Rulesets*.
+
+It is not available yet: GitHub offers it for a private repository only on a paid plan, and
+the organization is on the free one. It becomes available when the repository is public.
+
+Until then it is an agreement between the maintainers: nobody pushes to `main` directly,
+except for the commit that follows `squeeze accept`.
+
+When the rule is turned on:
+
+- It protects the whole branch, not single directories, so changes to the docs and the tool
+  need a pull request too.
+- The commit that follows `squeeze accept` needs its own pull request, unless maintainers are
+  allowed to bypass the rule, which is an option of the same setting.
+- Turn on with it: *Require approvals*, so that a second maintainer approves each pull
+  request; *Require branches to be up to date before merging*, so that two pull requests for
+  the same version cannot both merge; and *Block force pushes*.
