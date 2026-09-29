@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.ExC4.Lower.V007",
+  "solution_module": "SqueezeBench.Problems.ExC4.Records.Lower.V007.Proof",
+  "theorem_names": [
+    "SqueezeBench.ExC4.Lower.V007.valid",
+    "SqueezeBench.ExC4.Lower.V007.improves",
+    "SqueezeBench.ExC4.Lower.V007.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.ExC4.Lower.V007.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

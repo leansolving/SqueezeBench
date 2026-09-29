@@ -1,0 +1,4 @@
+-- Root of the `Fixtures` library: records that must be rejected, turned away or accepted, the
+-- expected exit code in each metadata.toml, so the gates can be regression-tested by
+-- `lake exe squeeze test`. Deliberately absent from
+-- defaultTargets.

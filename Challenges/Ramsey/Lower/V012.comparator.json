@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.Ramsey.Lower.V012",
+  "solution_module": "SqueezeBench.Problems.Ramsey.Records.Lower.V012.Proof",
+  "theorem_names": [
+    "SqueezeBench.Ramsey.Lower.V012.valid",
+    "SqueezeBench.Ramsey.Lower.V012.improves",
+    "SqueezeBench.Ramsey.Lower.V012.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.Ramsey.Lower.V012.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

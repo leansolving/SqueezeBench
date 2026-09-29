@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.ExGirthFive.Lower.V011",
+  "solution_module": "SqueezeBench.Problems.ExGirthFive.Records.Lower.V011.Proof",
+  "theorem_names": [
+    "SqueezeBench.ExGirthFive.Lower.V011.valid",
+    "SqueezeBench.ExGirthFive.Lower.V011.improves",
+    "SqueezeBench.ExGirthFive.Lower.V011.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.ExGirthFive.Lower.V011.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

@@ -1,0 +1,1 @@
+Note from the benchmark maintainers: please continue with the loop as described in your instructions (next version, or finishing the current one). Do not wait for input; stop only as described under *Ending a session* or when we send a stop notice.

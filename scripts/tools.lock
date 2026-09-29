@@ -1,0 +1,22 @@
+# Pinned revisions of the verification tools that cannot be Lake dependencies.
+# comparator and lean4export are NOT here: lake-manifest.json is their single source of
+# truth. Read by scripts/bootstrap_tools.sh; flat keys so a sed one-liner can parse it.
+
+# landrun's go.mod requires go >= 1.24.0 and apt ships 1.22, so the bootstrap fetches
+# an official release when the system Go is missing or too old. Any Go >= 1.24 is fine;
+# this is the toolchain that compiles landrun, not a runtime dependency of anything.
+go-version = "1.27.1"
+go-url     = "https://go.dev/dl/go1.27.1.linux-amd64.tar.gz"
+go-sha256  = "63d339f0da5ab53635a56f2490a7984dfe12dfcff22ad749f63edaf590168445"
+
+# github.com/Zouuup/landrun: v0.1.17 plus four commits, the same pin PalomarTemplate,
+# PalomarSubmission and anthropics/formal-math use. Still swallows lean4export's `--`,
+# hence scripts/landrun-wrapper.sh.
+landrun-module = "github.com/zouuup/landrun/cmd/landrun"
+landrun-commit = "811cfff51ceaf3d9843708aa6d22e9b84ccac8b4"
+
+# The robsimmons fork of ammkrn/nanoda_lib is what every surveyed Comparator adopter pins
+# (Palomar, formal-math, lean-eval). Not on crates.io and no release binaries, so it is
+# built from source with `cargo build --release --locked` (Cargo.lock is committed there).
+nanoda-repo   = "https://github.com/robsimmons/nanoda_lib.git"
+nanoda-commit = "68d5ca9db226849b41a6fff59d796ff19d0a8840"

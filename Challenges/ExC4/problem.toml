@@ -1,0 +1,15 @@
+# Trusted verification configuration for ExC4. Lives beside the Challenges so the
+# submission diff restriction protects it: a submitter who could edit `oracles` would
+# switch off the gate that stops a record being defined as the problem's own `f`.
+
+problem        = "ExC4"
+n-min          = 1
+directions     = ["lower", "upper"]
+
+# `#check_admissible` rejects a record whose *definition* transitively reaches any of
+# these. Proofs may mention them freely.
+# `extremalNumber` is Mathlib's name for the same quantity, so it is listed with `f`.
+oracles        = ["SqueezeBench.ExC4.f", "SimpleGraph.extremalNumber"]
+
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison (DESIGN 5.2 gate 5).
+fuel-budget-heartbeats = 200000

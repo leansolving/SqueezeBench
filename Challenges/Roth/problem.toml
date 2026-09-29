@@ -1,0 +1,16 @@
+# Trusted verification configuration for Roth. Lives beside the Challenges so the submission
+# diff restriction protects it: a submitter who could edit `oracles` would switch off the gate
+# that stops a record being defined as the problem's own `f`.
+
+problem        = "Roth"
+n-min          = 1
+directions     = ["lower", "upper"]
+
+# `#check_admissible` rejects a record whose *definition* transitively reaches any of these.
+# Proofs may mention them freely. `rothNumberNat` is listed alongside `f`: it is Mathlib's name
+# for the very same quantity, so a record routed through it would be `f` under another name --
+# computable in principle, but exponential, and so useless to the next submitter.
+oracles        = ["SqueezeBench.Roth.f", "rothNumberNat", "addRothNumber"]
+
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison.
+fuel-budget-heartbeats = 200000

@@ -1,0 +1,3 @@
+name    = "baseline claude-opus-5"
+witness = 8718968605206943442
+based-on = ["V006"]

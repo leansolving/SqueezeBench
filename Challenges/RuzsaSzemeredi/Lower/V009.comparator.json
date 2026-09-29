@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.RuzsaSzemeredi.Lower.V009",
+  "solution_module": "SqueezeBench.Problems.RuzsaSzemeredi.Records.Lower.V009.Proof",
+  "theorem_names": [
+    "SqueezeBench.RuzsaSzemeredi.Lower.V009.valid",
+    "SqueezeBench.RuzsaSzemeredi.Lower.V009.improves",
+    "SqueezeBench.RuzsaSzemeredi.Lower.V009.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.RuzsaSzemeredi.Lower.V009.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

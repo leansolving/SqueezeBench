@@ -1,0 +1,3 @@
+name     = "trial claude-fable"
+witness  = 28
+based-on = ["V003", "V005"]

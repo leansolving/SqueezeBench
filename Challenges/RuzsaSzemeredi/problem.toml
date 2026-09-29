@@ -1,0 +1,16 @@
+# Trusted verification configuration for RuzsaSzemeredi. Lives beside the Challenges so the
+# submission diff restriction protects it: a submitter who could edit `oracles` would switch
+# off the gate that stops a record being defined as the problem's own `f`.
+
+problem        = "RuzsaSzemeredi"
+n-min          = 3
+directions     = ["lower", "upper"]
+
+# `#check_admissible` rejects a record whose *definition* transitively reaches any of these.
+# Proofs may mention them freely. Mathlib's own names for the same quantity are listed
+# alongside `f`, and so is `rothNumberNat`: Mathlib's lower bound for this problem routes
+# through Behrend via Roth, so a record could otherwise smuggle in an exponential search.
+oracles = ["SqueezeBench.RuzsaSzemeredi.f", "ruzsaSzemerediNumberNat", "ruzsaSzemerediNumber", "rothNumberNat"]
+
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison.
+fuel-budget-heartbeats = 200000

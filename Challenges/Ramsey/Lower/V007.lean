@@ -1,0 +1,22 @@
+import SqueezeBench.Core
+import SqueezeBench.Problems.Ramsey.Records.Lower.V006.Def
+
+/-!
+# Challenge — Ramsey, lower direction, V007
+
+The trusted statement of record for version V007. `record` is the definition hole
+`Records/Lower/V007/Def.lean` fills; the three obligations are stated against `SqueezeBench.Ramsey.f`,
+`nMin` and the previous record `SqueezeBench.Ramsey.Lower.V006.record`, fully qualified so that no
+`open` in the record can redirect them. Written once, when V006 was accepted; never edited.
+-/
+
+namespace SqueezeBench.Ramsey.Lower.V007
+
+def record : SqueezeBench.BoundFn := sorry
+
+theorem valid : SqueezeBench.LowerBoundHolds SqueezeBench.Ramsey.f record := sorry
+theorem improves : SqueezeBench.ImprovesLower SqueezeBench.Ramsey.Lower.V006.record record := sorry
+theorem strict :
+    SqueezeBench.StrictlyImprovesLower SqueezeBench.Ramsey.nMin SqueezeBench.Ramsey.Lower.V006.record record := sorry
+
+end SqueezeBench.Ramsey.Lower.V007

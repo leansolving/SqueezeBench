@@ -1,0 +1,54 @@
+# Lean / Lake build artifacts
+.lake/
+lake-packages/
+build/
+*.olean
+*.ilean
+
+# lake-manifest.json is intentionally tracked for reproducibility.
+
+# Python (scripts/bootstrap_tools.sh uses python3 for the manifest; CI helpers)
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.pytest_cache/
+.mypy_cache/
+.venv/
+venv/
+
+# Claude Code local config (untracked)
+.claude/
+
+# OS / editor
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/
+
+# Local-only output
+leaderboard-cache/
+write_up/ICLR/manuscript/references.md
+*.log
+
+# Pinned verification tools built by `lake exe squeeze bootstrap` (never committed)
+.tools/
+
+# LaTeX build artifacts (the compiled PDF stays tracked)
+*.aux
+*.bbl
+*.blg
+*.out
+*.synctex.gz
+*.fls
+*.fdb_latexmk
+*.toc
+*.lof
+*.lot
+*.bcf
+*.run.xml
+*.nav
+*.snm
+*.vrb

@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.HypercubeC4.Upper.V007",
+  "solution_module": "SqueezeBench.Problems.HypercubeC4.Records.Upper.V007.Proof",
+  "theorem_names": [
+    "SqueezeBench.HypercubeC4.Upper.V007.valid",
+    "SqueezeBench.HypercubeC4.Upper.V007.improves",
+    "SqueezeBench.HypercubeC4.Upper.V007.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.HypercubeC4.Upper.V007.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

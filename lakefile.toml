@@ -1,0 +1,38 @@
+name = "squeezebench"
+version = "0.1.0"
+defaultTargets = ["SqueezeBench"]
+
+[[require]]
+name = "mathlib"
+scope = "leanprover-community"
+rev = "v4.31.0"
+
+# Core, problem definitions, and record versions.
+[[lean_lib]]
+name = "SqueezeBench"
+globs = ["SqueezeBench", "SqueezeBench.+"]
+
+# Comparator statement surface; sorried by design, so not a default target.
+[[lean_lib]]
+name = "Challenges"
+globs = ["Challenges.+"]
+
+# Records that must be rejected or turned away, one per gate; not a default target.
+[[lean_lib]]
+name = "Fixtures"
+globs = ["Fixtures.+"]
+
+# The verifier; tag must match lean-toolchain. See docs/COMPARATOR.md.
+[[require]]
+name = "Comparator"
+git = "https://github.com/leanprover/comparator.git"
+rev = "v4.31.0"
+
+# `lake exe squeeze`: the maintainer tool (new / verify / audit / test / accept / bootstrap) in
+# SqueezeBench/Tool/. The interpreter flag is for verify's Def.lean gate, which loads a
+# record's imports (Mathlib included) to parse the file.
+[[lean_exe]]
+name = "squeeze"
+root = "SqueezeBench.Tool.Main"
+supportInterpreter = true
+weakLinkArgs = ["-lLake"]

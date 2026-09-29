@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.Golomb.Lower.V009",
+  "solution_module": "SqueezeBench.Problems.Golomb.Records.Lower.V009.Proof",
+  "theorem_names": [
+    "SqueezeBench.Golomb.Lower.V009.valid",
+    "SqueezeBench.Golomb.Lower.V009.improves",
+    "SqueezeBench.Golomb.Lower.V009.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.Golomb.Lower.V009.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

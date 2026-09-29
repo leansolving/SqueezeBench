@@ -1,0 +1,3 @@
+name    = "baseline claude-opus-5"
+witness = 24
+based-on = ["V001", "V002", "V003"]

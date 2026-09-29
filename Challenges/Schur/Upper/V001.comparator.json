@@ -1,0 +1,18 @@
+{
+  "challenge_module": "Challenges.Schur.Upper.V001",
+  "solution_module": "SqueezeBench.Problems.Schur.Records.Upper.V001.Proof",
+  "theorem_names": [
+    "SqueezeBench.Schur.Upper.V001.valid",
+    "SqueezeBench.Schur.Upper.V001.improves",
+    "SqueezeBench.Schur.Upper.V001.strict"
+  ],
+  "definition_names": [
+    "SqueezeBench.Schur.Upper.V001.record"
+  ],
+  "permitted_axioms": [
+    "propext",
+    "Quot.sound",
+    "Classical.choice"
+  ],
+  "enable_nanoda": true
+}

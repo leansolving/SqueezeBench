@@ -1,0 +1,21 @@
+{
+  "model": "claude-opus-5",
+  "models_used": [
+    "claude-opus-5"
+  ],
+  "seconds": 2141,
+  "stopped": "self",
+  "accepted": 3,
+  "memory": {
+    "limit": "16G",
+    "peak_mb": 1484,
+    "oom_kills": 0
+  },
+  "turns": 42,
+  "tokens": {
+    "input_tokens": 76,
+    "output_tokens": 64315,
+    "cache_creation_input_tokens": 108747,
+    "cache_read_input_tokens": 3263048
+  }
+}

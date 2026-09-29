@@ -1,0 +1,16 @@
+# Trusted verification configuration for Ramsey3. Lives beside the Challenges so the
+# submission diff restriction protects it: a submitter who could edit `oracles` would
+# switch off the gate that stops a record being defined as the problem's own `f`.
+
+problem        = "Ramsey3"
+n-min          = 2
+directions     = ["lower", "upper"]
+
+# `#check_admissible` rejects a record whose *definition* transitively reaches any of
+# these. Proofs may mention them freely. `SqueezeBench.Ramsey.f` is listed alongside this problem's
+# own `f`: the two share the `Forces` relation, and a record routed through the diagonal
+# problem's `f` would be just as unevaluable.
+oracles        = ["SqueezeBench.Ramsey3.f", "SqueezeBench.Ramsey.f"]
+
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison (DESIGN 5.2 gate 5).
+fuel-budget-heartbeats = 200000

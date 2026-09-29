@@ -1,0 +1,3 @@
+-- Root of the `Challenges` library: the trusted statement surface, one file per record
+-- version, that Comparator judges records against. Sorried by design, so kept out of
+-- `defaultTargets`.
