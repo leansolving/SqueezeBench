@@ -42,7 +42,7 @@ tutorial and not a benchmark problem.
 
 | | |
 |---|---|
-| Lower record | `Records/Lower/V001/` — beats V000 at witness `5` (Alice, 2026-08-04) |
+| Lower record | `Records/Lower/V002/` — beats V001 at witness `6` (Pablo Manrique; based on V001, 2026-09-29) |
 | Fixtures | `Fixtures/Tutorial/{Bob,RecordIsF,ShadowedF,MacroInDef,WrongWitness,BvCheck,PlainNativeDecide}/` — answers to the open `V002`, one per gate and two whose proofs rest on native evaluation, checked by `lake exe squeeze test` |
 | Upper record | not seeded |
 | Live | no |
@@ -57,3 +57,4 @@ The author is the `name` in the record's `metadata.toml`.
 | version | date | author | witness | value at the witness |
 |---|---|---|---|---|
 | V001 | 2026-08-04 | Alice | 5 | 1 → 4 |
+| V002 | 2026-09-29 | Pablo Manrique; based on V001 | 6 | 1 → 4 |
