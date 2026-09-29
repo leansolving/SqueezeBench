@@ -66,6 +66,79 @@ There is a complete worked pair in the repository: the accepted
 `SqueezeBench/Problems/Tutorial/Records/Lower/V001/` (patch idiom) and the fixture
 `Fixtures/Tutorial/Bob/` (`maxWith` idiom).
 
+## Submitting, step by step
+
+In the commands below, `<Problem>` is the problem, `<Direction>` is `Lower` or `Upper`,
+`V<k>` is the open version and `<branch>` is a branch name of your choice. The later sections
+explain what to write in each file.
+
+**1. Fork and clone.** You cannot push to this repository, so you work in your own copy.
+Fork it on GitHub, then:
+
+```sh
+git clone https://github.com/<your-user>/SqueezeBench.git
+cd SqueezeBench
+git remote add upstream https://github.com/leansolving/SqueezeBench.git
+```
+
+With the GitHub CLI, `gh repo fork leansolving/SqueezeBench --clone` does all three.
+
+**2. Set up, once per machine.**
+
+```sh
+lake exe cache get           # prebuilt Mathlib
+lake build
+lake exe squeeze bootstrap   # the verifier tools; Linux only, needs cargo
+```
+
+**3. Create a branch** from the current `main` of this repository:
+
+```sh
+git fetch upstream
+git checkout -b <branch> upstream/main
+```
+
+**4. Lay out the record.**
+
+```sh
+lake exe squeeze new <Problem> <lower|upper>
+```
+
+**5. Write the record.** Edit `Def.lean` and `Proof.lean`, fill in `REPORT.md`, set the
+`witness` in `metadata.toml`, and build:
+
+```sh
+lake build SqueezeBench.Problems.<Problem>.Records.<Direction>.V<k>.Proof
+```
+
+**6. Commit your directory and nothing else.**
+
+```sh
+git add SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>
+git commit -m "<Problem> <Direction> V<k>"
+```
+
+**7. Verify.** This is the command the maintainers run:
+
+```sh
+lake exe squeeze verify SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k> --base upstream/main
+```
+
+It must end with exit code 0. Exit code 3 means someone landed first; see *Rebasing* below.
+
+**8. Push and open the pull request.**
+
+```sh
+git push -u origin <branch>
+gh pr create --repo leansolving/SqueezeBench --base main
+```
+
+Without the GitHub CLI, open the pull request from your fork's page on GitHub.
+
+**9. Wait for the review.** A maintainer runs the same verification from a fresh checkout,
+reads your `REPORT.md` and merges. To change something, commit and push to the same branch;
+the pull request updates itself.
+
 ## The Challenge fixes your statement
 
 You do not write the statements. For each version of each problem and direction the
