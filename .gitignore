@@ -52,3 +52,6 @@ write_up/ICLR/manuscript/references.md
 *.nav
 *.snm
 *.vrb
+
+
+.codex/
