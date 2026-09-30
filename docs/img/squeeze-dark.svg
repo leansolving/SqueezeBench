@@ -1,0 +1,30 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 760 350" width="760" height="350" role="img" aria-labelledby="t d" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif" font-size="14">
+  <title id="t">Two proved bounds squeezing an unknown function</title>
+  <desc id="d">Schematic. The upper record and the lower record coincide for small n, where f is known exactly. For larger n they separate, and the unknown f lies in the band between them. Improvements push the upper record down and the lower record up.</desc>
+  <!-- axes -->
+  <path d="M60 20V310H650" fill="none" stroke="#c3c2b7" stroke-width="1"/>
+  <text x="650" y="330" text-anchor="end" fill="#c3c2b7">n</text>
+  <text x="50" y="30" text-anchor="end" fill="#c3c2b7">value</text>
+  <!-- the band where f must lie -->
+  <path d="M200 258L260 230 320 200 380 166 440 130 500 94 560 62 620 36V154L560 167 500 181 440 196 380 212 320 228 260 244Z" fill="#2b2f37"/>
+  <!-- f: unknown past the point where the records separate -->
+  <path d="M200 258L260 238 320 215 380 190 440 163 500 135 560 108 620 84" fill="none" stroke="#c3c2b7" stroke-width="2" stroke-dasharray="3 6" stroke-linecap="round"/>
+  <!-- upper record -->
+  <path d="M200 258L260 230 320 200 380 166 440 130 500 94 560 62 620 36" fill="none" stroke="#d95926" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- lower record -->
+  <path d="M200 258L260 244 320 228 380 212 440 196 500 181 560 167 620 154" fill="none" stroke="#3987e5" stroke-width="2" stroke-linejoin="round" stroke-linecap="round"/>
+  <!-- where the records meet, f is known exactly -->
+  <path d="M80 290L140 275 200 258" fill="none" stroke="#ffffff" stroke-width="2" stroke-linecap="round"/>
+  <g fill="#ffffff"><circle cx="80" cy="290" r="4.5"/><circle cx="140" cy="275" r="4.5"/><circle cx="200" cy="258" r="4.5"/></g>
+  <text x="72" y="238" fill="#ffffff">records meet:</text>
+  <text x="72" y="256" fill="#c3c2b7">f is known exactly</text>
+  <!-- improvements push the records towards each other -->
+  <g fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M530 22V50M524 43L530 51 536 43" stroke="#d95926"/>
+    <path d="M530 206V180M524 187L530 179 536 187" stroke="#3987e5"/>
+  </g>
+  <!-- direct labels -->
+  <text x="632" y="41" fill="#ffffff">upper record</text>
+  <text x="632" y="89" fill="#c3c2b7">f, unknown</text>
+  <text x="632" y="159" fill="#ffffff">lower record</text>
+</svg>
