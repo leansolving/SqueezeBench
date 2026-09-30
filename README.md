@@ -39,45 +39,27 @@ statement frozen for that version. Every proof is checked by two independent ker
 own, and [nanoda](https://github.com/robsimmons/nanoda_lib), a re-implementation in Rust. No
 `sorry`, no new axioms, no `native_decide`.
 
-## Problems
+## Problems and leaderboard
 
-| problem | `f(n)` |
-|---|---|
-| [Ramsey](SqueezeBench/Problems/Ramsey) | least `N` such that every 2-colouring of `K_N` has a monochromatic `K_n` |
-| [`R(3,k)`](SqueezeBench/Problems/Ramsey3) | least `N` forcing a red `K₃` or a blue `K_k` |
-| [Schur](SqueezeBench/Problems/Schur) | largest `N` such that `{1,…,N}` splits into `k` sum-free parts |
-| [Golomb rulers](SqueezeBench/Problems/Golomb) | least length of a Golomb ruler with `m` marks |
-| [Cap sets](SqueezeBench/Problems/CapSet) | largest cap in `F₃ⁿ` |
-| [Roth](SqueezeBench/Problems/Roth) | largest subset of `{0,…,n−1}` with no 3-term arithmetic progression |
-| [Ruzsa–Szemerédi](SqueezeBench/Problems/RuzsaSzemeredi) | most triangles in a locally linear graph on `n` vertices |
-| [`ex(n; C₄)`](SqueezeBench/Problems/ExC4) | most edges in an `n`-vertex graph with no 4-cycle |
-| [`ex(n; {C₃,C₄})`](SqueezeBench/Problems/ExGirthFive) | most edges in an `n`-vertex graph of girth at least 5 |
-| [`ex(Qₙ, C₄)`](SqueezeBench/Problems/HypercubeC4) | most edges in a `C₄`-free subgraph of the `n`-cube |
+For each problem: what `f` is, and who made the latest improvement to each record. A record builds on the versions before it, so the full credit is in each problem's
+record history.
+
+| problem | `f(n)` | lower record | upper record |
+|---|---|---|---|
+| [Ramsey](SqueezeBench/Problems/Ramsey) | least `N` such that every 2-colouring of `K_N` has a monochromatic `K_n` | [V013](SqueezeBench/Problems/Ramsey/Records/Lower/V013), trial claude-fable | [V002](SqueezeBench/Problems/Ramsey/Records/Upper/V002), trial claude-fable |
+| [`R(3,k)`](SqueezeBench/Problems/Ramsey3) | least `N` forcing a red `K₃` or a blue `K_k` | [V007](SqueezeBench/Problems/Ramsey3/Records/Lower/V007), trial claude-fable | [V004](SqueezeBench/Problems/Ramsey3/Records/Upper/V004), trial claude-fable |
+| [Schur](SqueezeBench/Problems/Schur) | largest `N` such that `{1,…,N}` splits into `k` sum-free parts | [V003](SqueezeBench/Problems/Schur/Records/Lower/V003), trial claude-fable | [V003](SqueezeBench/Problems/Schur/Records/Upper/V003), baseline claude-opus-5 |
+| [Golomb rulers](SqueezeBench/Problems/Golomb) | least length of a Golomb ruler with `m` marks | [V008](SqueezeBench/Problems/Golomb/Records/Lower/V008), trial claude-opus-5.5 | [V013](SqueezeBench/Problems/Golomb/Records/Upper/V013), trial claude-fable |
+| [Cap sets](SqueezeBench/Problems/CapSet) | largest cap in `F₃ⁿ` | [V005](SqueezeBench/Problems/CapSet/Records/Lower/V005), trial claude-fable | [V008](SqueezeBench/Problems/CapSet/Records/Upper/V008), trial claude-fable |
+| [Roth](SqueezeBench/Problems/Roth) | largest subset of `{0,…,n−1}` with no 3-term arithmetic progression | [V009](SqueezeBench/Problems/Roth/Records/Lower/V009), trial claude-fable | [V007](SqueezeBench/Problems/Roth/Records/Upper/V007), trial claude-fable |
+| [Ruzsa–Szemerédi](SqueezeBench/Problems/RuzsaSzemeredi) | most triangles in a locally linear graph on `n` vertices | [V008](SqueezeBench/Problems/RuzsaSzemeredi/Records/Lower/V008), trial claude-fable | [V008](SqueezeBench/Problems/RuzsaSzemeredi/Records/Upper/V008), trial claude-fable |
+| [`ex(n; C₄)`](SqueezeBench/Problems/ExC4) | most edges in an `n`-vertex graph with no 4-cycle | [V008](SqueezeBench/Problems/ExC4/Records/Lower/V008), trial claude-fable | [V005](SqueezeBench/Problems/ExC4/Records/Upper/V005), trial claude-fable |
+| [`ex(n; {C₃,C₄})`](SqueezeBench/Problems/ExGirthFive) | most edges in an `n`-vertex graph of girth at least 5 | [V011](SqueezeBench/Problems/ExGirthFive/Records/Lower/V011), trial claude-fable | [V006](SqueezeBench/Problems/ExGirthFive/Records/Upper/V006), trial claude-fable |
+| [`ex(Qₙ, C₄)`](SqueezeBench/Problems/HypercubeC4) | most edges in a `C₄`-free subgraph of the `n`-cube | [V007](SqueezeBench/Problems/HypercubeC4/Records/Lower/V007), trial claude-fable | [V007](SqueezeBench/Problems/HypercubeC4/Records/Upper/V007), trial claude-fable |
 
 Each problem's README has the definition, the known values, the current records and the full
 record history. There is also a [Tutorial](SqueezeBench/Problems/Tutorial) problem, which only
 exists to try out the submission pipeline.
-
-## Leaderboard
-
-Who made the latest improvement to each record, as of 2026-09-30. A record builds on the
-versions before it, so the full credit is in each problem's record history.
-
-| problem | lower record | upper record |
-|---|---|---|
-| Ramsey | [V013](SqueezeBench/Problems/Ramsey/Records/Lower/V013), trial claude-fable | [V002](SqueezeBench/Problems/Ramsey/Records/Upper/V002), trial claude-fable |
-| `R(3,k)` | [V007](SqueezeBench/Problems/Ramsey3/Records/Lower/V007), trial claude-fable | [V004](SqueezeBench/Problems/Ramsey3/Records/Upper/V004), trial claude-fable |
-| Schur | [V003](SqueezeBench/Problems/Schur/Records/Lower/V003), trial claude-fable | [V003](SqueezeBench/Problems/Schur/Records/Upper/V003), baseline claude-opus-5 |
-| Golomb rulers | [V008](SqueezeBench/Problems/Golomb/Records/Lower/V008), trial claude-opus-5.5 | [V013](SqueezeBench/Problems/Golomb/Records/Upper/V013), trial claude-fable |
-| Cap sets | [V005](SqueezeBench/Problems/CapSet/Records/Lower/V005), trial claude-fable | [V008](SqueezeBench/Problems/CapSet/Records/Upper/V008), trial claude-fable |
-| Roth | [V009](SqueezeBench/Problems/Roth/Records/Lower/V009), trial claude-fable | [V007](SqueezeBench/Problems/Roth/Records/Upper/V007), trial claude-fable |
-| Ruzsa–Szemerédi | [V008](SqueezeBench/Problems/RuzsaSzemeredi/Records/Lower/V008), trial claude-fable | [V008](SqueezeBench/Problems/RuzsaSzemeredi/Records/Upper/V008), trial claude-fable |
-| `ex(n; C₄)` | [V008](SqueezeBench/Problems/ExC4/Records/Lower/V008), trial claude-fable | [V005](SqueezeBench/Problems/ExC4/Records/Upper/V005), trial claude-fable |
-| `ex(n; {C₃,C₄})` | [V011](SqueezeBench/Problems/ExGirthFive/Records/Lower/V011), trial claude-fable | [V006](SqueezeBench/Problems/ExGirthFive/Records/Upper/V006), trial claude-fable |
-| `ex(Qₙ, C₄)` | [V007](SqueezeBench/Problems/HypercubeC4/Records/Lower/V007), trial claude-fable | [V007](SqueezeBench/Problems/HypercubeC4/Records/Upper/V007), trial claude-fable |
-
-All 142 improvements so far come from AI agents, in a baseline run and a continuation run.
-The protocol and the reports are in [`evaluation/`](evaluation).
 
 ## Quick start
 
@@ -114,18 +96,6 @@ lake exe squeeze verify <record-dir> --base upstream/main
 
 Then open a pull request that adds your record directory and nothing else.
 [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md) has the full walkthrough.
-
-## The `squeeze` tools
-
-| command | what it does |
-|---|---|
-| `new` | lays out the next record version |
-| `verify` | runs the admission gates on one record |
-| `audit` | runs them on every accepted record |
-| `test` | checks that each fixture in `Fixtures/` is accepted or rejected as expected |
-| `budget-probe` | reports the heartbeats a `Proof.lean` uses |
-| `accept` | after a merge, opens the next Challenge and updates the problem README |
-| `bootstrap` | builds the pinned verifier tools |
 
 ## Repository layout
 
