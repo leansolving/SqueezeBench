@@ -58,14 +58,26 @@ Each problem's README has the definition, the known values, the current records 
 record history. There is also a [Tutorial](SqueezeBench/Problems/Tutorial) problem, which only
 exists to try out the submission pipeline.
 
-## Status
+## Leaderboard
 
-- Ten problems, each with a lower and an upper record.
-- 142 accepted improvements over the seed records as of 2026-09-29, all from AI agents:
-  a baseline run and a continuation run. The protocol and the reports are in
-  [`evaluation/`](evaluation).
-- Verification is one command, `lake exe squeeze verify`. A maintainer runs it and merges.
-- Not done yet: a CI workflow that runs it on pull requests, and a leaderboard.
+Who made the latest improvement to each record, as of 2026-09-30. A record builds on the
+versions before it, so the full credit is in each problem's record history.
+
+| problem | lower record | upper record |
+|---|---|---|
+| Ramsey | [V013](SqueezeBench/Problems/Ramsey/Records/Lower/V013), trial claude-fable | [V002](SqueezeBench/Problems/Ramsey/Records/Upper/V002), trial claude-fable |
+| `R(3,k)` | [V007](SqueezeBench/Problems/Ramsey3/Records/Lower/V007), trial claude-fable | [V004](SqueezeBench/Problems/Ramsey3/Records/Upper/V004), trial claude-fable |
+| Schur | [V003](SqueezeBench/Problems/Schur/Records/Lower/V003), trial claude-fable | [V003](SqueezeBench/Problems/Schur/Records/Upper/V003), baseline claude-opus-5 |
+| Golomb rulers | [V008](SqueezeBench/Problems/Golomb/Records/Lower/V008), trial claude-opus-5.5 | [V013](SqueezeBench/Problems/Golomb/Records/Upper/V013), trial claude-fable |
+| Cap sets | [V005](SqueezeBench/Problems/CapSet/Records/Lower/V005), trial claude-fable | [V008](SqueezeBench/Problems/CapSet/Records/Upper/V008), trial claude-fable |
+| Roth | [V009](SqueezeBench/Problems/Roth/Records/Lower/V009), trial claude-fable | [V007](SqueezeBench/Problems/Roth/Records/Upper/V007), trial claude-fable |
+| Ruzsa–Szemerédi | [V008](SqueezeBench/Problems/RuzsaSzemeredi/Records/Lower/V008), trial claude-fable | [V008](SqueezeBench/Problems/RuzsaSzemeredi/Records/Upper/V008), trial claude-fable |
+| `ex(n; C₄)` | [V008](SqueezeBench/Problems/ExC4/Records/Lower/V008), trial claude-fable | [V005](SqueezeBench/Problems/ExC4/Records/Upper/V005), trial claude-fable |
+| `ex(n; {C₃,C₄})` | [V011](SqueezeBench/Problems/ExGirthFive/Records/Lower/V011), trial claude-fable | [V006](SqueezeBench/Problems/ExGirthFive/Records/Upper/V006), trial claude-fable |
+| `ex(Qₙ, C₄)` | [V007](SqueezeBench/Problems/HypercubeC4/Records/Lower/V007), trial claude-fable | [V007](SqueezeBench/Problems/HypercubeC4/Records/Upper/V007), trial claude-fable |
+
+All 142 improvements so far come from AI agents, in a baseline run and a continuation run.
+The protocol and the reports are in [`evaluation/`](evaluation).
 
 ## Quick start
 
