@@ -24,7 +24,7 @@ the Def.lean restriction, Comparator (at most 30 min and 16 GB), the computation
 Proof.lean (heartbeats per declaration and in all), admissibility, and the fuel
 budget (heartbeats and memory of `decide +kernel` at the witness, and of evaluating the record at
 every n from nMin to fuel-range-max). --accepted skips the rebase check (the directory is an
-accepted record; `squeeze audit` passes it). Exit 0 ACCEPT, 1 REJECT,
+accepted record, or a fixture; `squeeze audit` and `squeeze test` pass it). Exit 0 ACCEPT, 1 REJECT,
 3 rebase needed, 2 when the tools or arguments are wrong."
 
 /-- A judged rejection of the record (exit 1). -/

@@ -4,7 +4,11 @@ import SqueezeBench.Tool.Tree
 /-! `squeeze test`: run `squeeze verify` on every fixture under `Fixtures/<P>/<Name>/` and compare the
 exit code with the `expect` field of its `metadata.toml`. The fixtures are the regression
 tests of the gates: one per gate, two whose proofs rest on native evaluation, one that must
-be accepted, and one that must be turned away for rebase. -/
+be accepted, and one that must be turned away for rebase.
+
+A fixture is judged against the Challenge of the version it names, which stays in the tree, so
+`verify` runs with `--accepted` (no rebase check) and accepting a new record does not break the
+fixtures. Only a fixture that expects the rebase exit code keeps the check. -/
 
 namespace SqueezeBench.Tool.Test
 
@@ -15,7 +19,8 @@ def usage : String := "\
 usage: lake exe squeeze test
 
 Runs `lake exe squeeze verify` on each Fixtures/<Problem>/<Name>/ directory and checks the exit
-code against `expect` in its metadata.toml. Exit 0 when every fixture behaves, 1 otherwise."
+code against `expect` in its metadata.toml. The rebase check runs only for a fixture that
+expects exit code 3. Exit 0 when every fixture behaves, 1 otherwise."
 
 def fail (msg : String) : IO α := infra s!"squeeze test: {msg}"
 
@@ -42,7 +47,8 @@ def run (args : List String) : IO UInt32 := do
     let md ← Metadata.load (FilePath.mk d / "metadata.toml")
     let some expect := md.expect | fail s!"{d}/metadata.toml has no `expect` (the exit code verify must produce)"
     IO.println s!"===== {d}  (expect {expect})"
-    let code ← runInherit { cmd := squeeze.toString, args := #["verify", d] }
+    let args := if expect == 3 then #["verify", d] else #["verify", d, "--accepted"]
+    let code ← runInherit { cmd := squeeze.toString, args }
     results := results.push (d, expect, code)
   IO.println "===== test summary"
   let mut failed := false

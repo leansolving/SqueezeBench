@@ -80,7 +80,8 @@ lake exe squeeze test                      # verify every fixture and check its 
 `audit` judges each record against the Challenge that admitted it. `accept` never edits a
 record; it opens the next Challenge and updates the problem README.
 
-The fixtures are in `Fixtures/Tutorial/`:
+The fixtures are in `Fixtures/Tutorial/`. They answer Tutorial Lower `V002` and are judged against
+that version's Challenge, so accepting new Tutorial records does not affect them:
 
 | fixture | expected |
 |---|---|

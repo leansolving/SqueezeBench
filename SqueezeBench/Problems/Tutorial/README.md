@@ -43,7 +43,7 @@ tutorial and not a benchmark problem.
 | | |
 |---|---|
 | Lower record | `Records/Lower/V002/` — beats V001 at witness `6` (Pablo Manrique; based on V001, 2026-09-29) |
-| Fixtures | `Fixtures/Tutorial/{Bob,RecordIsF,ShadowedF,MacroInDef,WrongWitness,BvCheck,PlainNativeDecide}/` — answers to the open `V002`, one per gate and two whose proofs rest on native evaluation, checked by `lake exe squeeze test` |
+| Fixtures | `Fixtures/Tutorial/` — 14 test submissions, one or more per gate. They answer `V002` (one answers `V001`) and are judged against that version's Challenge, so new records do not affect them. Checked by `lake exe squeeze test` |
 | Upper record | not seeded |
 | Live | no |
 
