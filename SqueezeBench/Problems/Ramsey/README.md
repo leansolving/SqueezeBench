@@ -11,7 +11,7 @@ improvements there are research news.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2).
+**Reporting only. These are never a source of theorems.**
 
 `R(1,1) = 1` is omitted: `nMin = 2`, and `f` is pinned to `0` below `nMin`, so listing it
 would make the anytime gap compare against a value `f` does not take.

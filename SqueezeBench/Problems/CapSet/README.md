@@ -13,7 +13,7 @@ closing that gap is open.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2). Values beyond
+**Reporting only. These are never a source of theorems.** Values beyond
 `n = 2` come from large computer searches.
 
 OEIS A090245 has offset 0 with `a(0) = 1`; that term is omitted here because `nMin = 1`.

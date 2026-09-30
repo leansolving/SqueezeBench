@@ -1,9 +1,18 @@
 # Adding a problem
 
-A problem is admitted only when `f` is genuinely defined (`DESIGN.md` §2.1 — a definitional
-`sorry` is barred, since `sorryAx` would propagate into every submission) and both directions
-carry a seeded, proved record. `squeeze` does not see a problem until `Challenges/<P>/`
-exists.
+A problem is a function `f : ℕ → ℕ` of one parameter. It fits the benchmark when:
+
+- `f(n)` is intractable in general, and known exactly only for small `n`;
+- the literature brackets it by lower and upper bounds;
+- no closed form for `f` is known, and none is expected soon. Otherwise the two records could
+  meet at every `n` and the problem would be finished.
+
+Out of scope: problems with several parameters or a continuous parameter, and any ranking of
+contributors or bounds by a single score.
+
+A problem is admitted only when `f` has a real definition and both directions carry a seeded,
+proved record. A `sorry` in the definition of `f` is barred, since `sorryAx` would spread into
+every submission. `squeeze` does not see a problem until `Challenges/<P>/` exists.
 
 ---
 
@@ -20,7 +29,7 @@ SqueezeBench/Problems/<P>/
 ├── Records/Lower/V000/Def.lean         -- `record`, the seed lower bound
 ├── Records/Lower/V000/Proof.lean       -- `valid`, and the mathematics behind it
 ├── Records/Lower/V000/metadata.toml    -- name = "SqueezeBench"
-├── Records/Lower/V000/REPORT.md        -- how the seed was obtained (DESIGN §3.3)
+├── Records/Lower/V000/REPORT.md        -- how the seed was obtained
 └── Records/Upper/V000/{Def,Proof}.lean, metadata.toml, REPORT.md
 
 Challenges/<P>/
@@ -48,7 +57,7 @@ import Mathlib
 import SqueezeBench.Core
 
 /-! Self-contained header: what the object is, the OEIS id, and — if `f` reuses a Mathlib
-definition — why that definition *is* the intended object. No reference to DESIGN.md. -/
+definition — why that definition *is* the intended object. -/
 
 namespace SqueezeBench.<P>
 
@@ -68,7 +77,7 @@ Three rules, all load-bearing:
 - **Pin to `0` below `nMin`.** This makes validity *total* in both directions — a lower bound
   pads with `0` and `0 ≤ 0`; an upper bound is unconstrained since everything is `≥ 0`. Without
   it every record lemma carries an `n ≥ nMin` hypothesis.
-- **`f` may be `noncomputable`** (§2.1 expects it usually is). Only the *record* must be
+- **`f` may be `noncomputable`**, and usually is. Only the *record* must be
   computable. `CapSet`'s `f` happens to be computable; `Ramsey`'s is not.
 - **Supply the transfer lemmas.** These are what make submissions one-liners, and they are the
   real deliverable of this file. One per direction:
@@ -94,7 +103,8 @@ example : f 2 = 4 := by decide
 
 The build then re-verifies them every run and fails loudly if the definition drifts — which a
 README table cannot do. This is also the sharpest test that `f` denotes the intended object.
-Values out of reach go in the README with citations, never as theorems (§2.2).
+Values out of reach go in the README with citations, never as theorems: most rest on large
+computer searches that cannot be replayed in Lean.
 
 ## 2. `Finite.lean` — only if `f` is `sInf`-defined
 
@@ -142,14 +152,14 @@ end SqueezeBench.<P>.Lower.V000
 name    = "SqueezeBench"
 ```
 
-Seed with a simple bound that is quick to formalise (`DESIGN.md` §4.1) — never from the known
+Seed with a simple bound that is quick to formalise — never from the known
 values, which are not theorems.
 
 ## 4. `Challenges/<P>/problem.toml` — the trusted configuration
 
 **`oracles` is the field that matters.** It must name `SqueezeBench.<P>.f` and any other constant a
 record must not reach; the admissibility gate rejects a record whose *definition* touches
-them. It lives beside the Challenges so the diff restriction (`DESIGN.md` §8) protects it: a submitter able
+them. It lives beside the Challenges so the diff restriction protects it: a submitter able
 to edit it could switch off the gate that stops a record being defined as `f` itself.
 
 ```toml
@@ -158,6 +168,9 @@ n-min          = 1
 directions     = ["lower", "upper"]
 oracles        = ["SqueezeBench.<P>.f"]
 fuel-budget-heartbeats = 200000
+fuel-range-max         = 100      # optional; the default
+max-def-bytes          = 65536    # optional; the default
+max-record-bytes       = 1048576  # optional; the default
 ```
 
 `fuel-range-max` (default 100) is the largest `n` at which the fuel gate evaluates a new record;
@@ -208,8 +221,6 @@ only, never a source of theorems*, with the OEIS id and any offset discrepancy c
 - [ ] both directions seeded as `Records/<Dir>/V000/` with `record`, `valid`, a `metadata.toml` and a `REPORT.md`
 - [ ] `problem.toml` names `SqueezeBench.<P>.f` in `oracles`; `squeeze accept` run for both directions
 - [ ] `lake exe squeeze audit <P>` accepts both seeds
-- [ ] no Lean source references `DESIGN.md` —
-      `grep -rn "DESIGN.md" --include=*.lean SqueezeBench/ Challenges/` returns nothing
 - [ ] `lake build` clean, and `#print axioms` on both `valid` inside
       `{propext, Classical.choice, Quot.sound}` (no `native_decide`, `bv_decide` or
       `bv_check`)

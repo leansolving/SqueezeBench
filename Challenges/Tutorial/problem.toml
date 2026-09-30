@@ -10,5 +10,5 @@ directions     = ["lower"]
 # these. Proofs may mention them freely.
 oracles        = ["SqueezeBench.Tutorial.f", "SqueezeBench.Tutorial.g"]
 
-# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison (DESIGN 5.2 gate 5).
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison.
 fuel-budget-heartbeats = 200000

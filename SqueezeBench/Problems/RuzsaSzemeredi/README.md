@@ -24,7 +24,7 @@ reporting upstream.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2).
+**Reporting only. These are never a source of theorems.**
 
 We have found few published values: the literature is about the asymptotics, and OEIS has no
 entry. The values below were computed by us, by an exhaustive search.

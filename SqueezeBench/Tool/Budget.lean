@@ -1,7 +1,7 @@
 import Lean
 import SqueezeBench.Tool.Proc
 
-/-! `squeeze budget-probe`: the computation budget of a record's `Proof.lean` (DESIGN 5.2 gate 4).
+/-! `squeeze budget-probe`: the computation budget of a record's `Proof.lean` (docs/CONTRIBUTING.md, Computation budget).
 A proof reasons; computation may only check data the record provides. Two limits enforce this:
 every declaration runs under `proofDeclHeartbeats`, and the heartbeats of the whole file sum to
 at most `proofTotalHeartbeats`, so a search split into many small lemmas is caught too.

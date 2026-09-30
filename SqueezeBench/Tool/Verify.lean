@@ -3,7 +3,7 @@ import SqueezeBench.Tool.Toml
 import SqueezeBench.Tool.Tree
 import SqueezeBench.Tool.Budget
 
-/-! `squeeze verify`: the rebase check and the six admission gates (DESIGN 8) for one record
+/-! `squeeze verify`: the rebase check and the six admission gates (docs/CONTRIBUTING.md) for one record
 directory, pending on a pull request or accepted on `main`, or for a fixture. Linux only:
 Comparator sandboxes with landrun, which needs Landlock, and it must not run as root. Tools
 come from `.tools/` (built by `squeeze bootstrap`) unless a `COMPARATOR_*` or `SQUEEZE_LANDRUN_BIN`
@@ -442,10 +442,10 @@ unsafe def verifyDir (dir : String) (base : Option String) (accepted : Bool) : I
   unless md.basedOn.isEmpty do note s!"based on {", ".intercalate md.basedOn.toList} (metadata.toml; checked by the reviewer)"
   let cfg ← ProblemConfig.load t.problemToml
   unless cfg.directions.contains t.dir do die s!"{t.problem} has no {t.dir} track (problem.toml: {cfg.directions.toList})"
-  -- rebase check (DESIGN 4.3): a version whose successor Challenge exists was already accepted
+  -- rebase check: a version whose successor Challenge exists was already accepted
   unless accepted do
     if ← (t.challenge (k + 1)).pathExists then
-      rebase s!"REBASE: {vtag k} of {t.problem} {t.dir} is already accepted ({t.challenge (k + 1)} exists).\n        Rename the directory to the open version and update the namespace and predecessor references (DESIGN 4.3)."
+      rebase s!"REBASE: {vtag k} of {t.problem} {t.dir} is already accepted ({t.challenge (k + 1)} exists).\n        Rename the directory to the open version and update the namespace and predecessor references (docs/CONTRIBUTING.md, Rebasing)."
   let module := moduleOfPath dir ++ ".Proof"
   unless loc.isFixture do
     let json ← IO.ofExcept (Json.parse (← IO.FS.readFile (t.comparatorJson k)))

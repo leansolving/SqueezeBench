@@ -12,5 +12,5 @@ directions     = ["lower", "upper"]
 # problem's `f` would be just as unevaluable.
 oracles        = ["SqueezeBench.Ramsey3.f", "SqueezeBench.Ramsey.f"]
 
-# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison (DESIGN 5.2 gate 5).
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison.
 fuel-budget-heartbeats = 200000

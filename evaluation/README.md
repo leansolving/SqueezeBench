@@ -4,6 +4,10 @@ The records after each problem's seed were produced by AI agents playing the sub
 agent per track, all with the same prompt. This folder holds what is needed to repeat that.
 The second phase, a continuation from the baseline's records with newer models, is described in `continuation/README.md`.
 
+> **Note.** The prompts and reports here are kept exactly as they were used. The repository has
+> changed since, so they would not apply as written today: some files they cite, such as
+> `docs/DESIGN.md`, no longer exist. Their content is now in `docs/CONTRIBUTING.md`.
+
 | file | what it is |
 |---|---|
 | `baseline-prompt.md` | the prompt template; `{P}`, `{DIR}`, `{DIR_LC}`, `{NAME}`, `{ORACLES}`, `{MEM}` and `{MINUTES}` are filled in per session |

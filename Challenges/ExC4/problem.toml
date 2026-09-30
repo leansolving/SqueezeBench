@@ -11,5 +11,5 @@ directions     = ["lower", "upper"]
 # `extremalNumber` is Mathlib's name for the same quantity, so it is listed with `f`.
 oracles        = ["SqueezeBench.ExC4.f", "SimpleGraph.extremalNumber"]
 
-# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison (DESIGN 5.2 gate 5).
+# Heartbeat budget (maxHeartbeats units) for `decide +kernel` on the witness comparison.
 fuel-budget-heartbeats = 200000

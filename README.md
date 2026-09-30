@@ -106,17 +106,14 @@ SqueezeBench/
 └── Tool/                  -- the `squeeze` tool
 Challenges/<Problem>/      -- the trusted statement for each version, and problem.toml
 Fixtures/                  -- records that must be accepted or rejected, for `squeeze test`
-docs/                      -- design and guides
+docs/                      -- guides
 evaluation/                -- the AI baseline: prompts, runner, reports
 scripts/                   -- builds the verifier tools
 ```
 
 ## Documentation
 
-- [`docs/DESIGN.md`](docs/DESIGN.md): the specification.
 - [`docs/CONTRIBUTING.md`](docs/CONTRIBUTING.md): how to submit a record.
-- [`docs/PIPELINE.md`](docs/PIPELINE.md): one submission, step by step, through the tools.
-- [`docs/COMPARATOR.md`](docs/COMPARATOR.md): why Comparator is the judge.
 - [`docs/ADDING_A_PROBLEM.md`](docs/ADDING_A_PROBLEM.md): what a new problem must provide.
 
 ## Citing SqueezeBench

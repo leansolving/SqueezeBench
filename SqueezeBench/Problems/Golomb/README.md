@@ -13,7 +13,7 @@ Exact values are known through `m = 28` and the problem is open beyond that.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2): proving
+**Reporting only. These are never a source of theorems**: proving
 `G(28) = 585` in Lean would mean redoing distributed.net's exhaustive search.
 
 Differences are the **positive** ones; the signed differences are never all distinct,

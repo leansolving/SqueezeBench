@@ -22,7 +22,7 @@ globs = ["Challenges.+"]
 name = "Fixtures"
 globs = ["Fixtures.+"]
 
-# The verifier; tag must match lean-toolchain. See docs/COMPARATOR.md.
+# The verifier; tag must match lean-toolchain. See docs/CONTRIBUTING.md.
 [[require]]
 name = "Comparator"
 git = "https://github.com/leanprover/comparator.git"

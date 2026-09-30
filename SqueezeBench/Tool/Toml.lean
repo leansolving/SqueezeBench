@@ -61,7 +61,7 @@ def Metadata.render (m : Metadata) : String :=
     else s!"based-on = [{", ".intercalate (m.basedOn.map (s!"\"{·}\"")).toList}]"
   "\n".intercalate [s!"name    = \"{m.name.getD ""}\"", witnessLine, basedOnLine, ""]
 
-/-- The trusted per-problem configuration `Challenges/<P>/problem.toml` (DESIGN 2.3). -/
+/-- The trusted per-problem configuration `Challenges/<P>/problem.toml` (docs/ADDING_A_PROBLEM.md). -/
 structure ProblemConfig where
   problem : String
   nMin : Nat := 0

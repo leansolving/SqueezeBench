@@ -12,7 +12,7 @@ growth rate.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2). `f` is
+**Reporting only. These are never a source of theorems.** `f` is
 noncomputable here, so none of these is machine-checked.
 
 | k | f(k) |

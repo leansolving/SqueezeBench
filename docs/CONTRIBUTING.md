@@ -1,155 +1,15 @@
 # Contributing to SqueezeBench
 
-You improve a problem's **record**: a Lean function `ℕ → ℕ` together with a machine-checked
-proof that it bounds `f`. A submission is a new function that is still a bound, does not
-regress anywhere, and is **strictly better at at least one `n`**.
+You improve a problem's **record**: a Lean function `ℕ → ℕ` with a machine-checked proof that
+it bounds `f`. This file explains what to write, how to submit it, and how it is checked.
 
-[`DESIGN.md`](DESIGN.md) states the rules; this file is the practical walkthrough. Run every
-command below from the project root; paths are relative to it.
+## How it works
 
-## What you submit
-
-A submission is the next record version itself, added in place:
-
-```
-SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>/
-├── Def.lean          -- the record function: `def record`, and nothing but definitions
-├── Proof.lean        -- the three obligations, and any helpers
-├── metadata.toml     -- your name, and the witness
-└── REPORT.md         -- how you obtained the record, and your setup
-```
-
-`V<k>` is the **open version**: the highest `Challenges/<Problem>/<Direction>/V<k>.lean` in
-the tree. Everything below it is an accepted record, and `V<k>` is the one you are writing.
-When your pull request is merged, your directory *is* the record; nothing is moved, renamed
-or rewritten. What was verified is what stays.
-
-Let the tool lay this out for you:
-
-```sh
-lake exe squeeze new
-```
-
-It asks for the problem, the direction, your credit name and an idiom, then writes
-`Def.lean` and `Proof.lean` with the namespace and statements copied from the Challenge, and a
-`metadata.toml` with your `name`, and a `REPORT.md` template. With the `patch` or `fold` idiom it also writes the record
-and the mechanical obligations of Idiom 1 or 2 below, leaving only the mathematics.
-
-Everything the prompts ask for can also be given on the command line, as a one-liner:
-
-```sh
-lake exe squeeze new Golomb upper --name "Alice Smith" --idiom patch --at 7 --value 25
-```
-
-Anything left out is asked for; anything given is not. `lake exe squeeze new --help` lists the
-options.
-
-**Your pull request must add your directory and touch nothing else.** Verification builds the
-trusted statement and your record from the same tree, so this is enforced.
-
-**Fill in `REPORT.md`.** Say how you found the bound and its proofs (by hand, with an AI
-agent, with automation, and from which sources) and your setup: the models and agents used, if
-any, your machine (CPU, memory, operating system), the time spent, and any computation outside
-Lean. The reviewer reads it before merging (DESIGN §3.3).
-
-**You are credited by the `name` in your `metadata.toml`.** After the merge, a maintainer
-runs `lake exe squeeze accept`, which opens the next Challenge and adds a row to the problem
-README's *Record history* with the date, your witness, and the value before and after.
-
-**Credit what you reuse.** If your record copies or adapts code from an earlier version —
-definitions, lemmas, proofs — list those versions in `based-on` in `metadata.toml`:
-`"V001"` for a version of the same track, `"<Problem>/<Dir>/V<k>"` for another track.
-`accept` shows the list next to your name in the *Record history*. Nothing can check it
-automatically; the reviewer does.
-
-There is a complete worked pair in the repository: the accepted
-`SqueezeBench/Problems/Tutorial/Records/Lower/V001/` (patch idiom) and the fixture
-`Fixtures/Tutorial/Bob/` (`maxWith` idiom).
-
-## Submitting, step by step
-
-In the commands below, `<Problem>` is the problem, `<Direction>` is `Lower` or `Upper`,
-`V<k>` is the open version and `<branch>` is a branch name of your choice. The later sections
-explain what to write in each file.
-
-**1. Fork and clone.** You cannot push to this repository, so you work in your own copy.
-Fork it on GitHub, then:
-
-```sh
-git clone https://github.com/<your-user>/SqueezeBench.git
-cd SqueezeBench
-git remote add upstream https://github.com/leansolving/SqueezeBench.git
-```
-
-With the GitHub CLI, `gh repo fork leansolving/SqueezeBench --clone` does all three.
-
-**2. Set up, once per machine.**
-
-```sh
-lake exe cache get           # prebuilt Mathlib
-lake build
-lake exe squeeze bootstrap   # the verifier tools; Linux only, needs cargo
-```
-
-**3. Create a branch** from the current `main` of this repository:
-
-```sh
-git fetch upstream
-git checkout -b <branch> upstream/main
-```
-
-**4. Lay out the record.**
-
-```sh
-lake exe squeeze new <Problem> <lower|upper>
-```
-
-**5. Write the record.** Edit `Def.lean` and `Proof.lean`, fill in `REPORT.md`, set the
-`witness` in `metadata.toml`, and build:
-
-```sh
-lake build SqueezeBench.Problems.<Problem>.Records.<Direction>.V<k>.Proof
-```
-
-**6. Commit your directory and nothing else.**
-
-```sh
-git add SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>
-git commit -m "<Problem> <Direction> V<k>"
-```
-
-**7. Verify.** This is the command the maintainers run:
-
-```sh
-lake exe squeeze verify SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k> --base upstream/main
-```
-
-It must end with exit code 0. Exit code 3 means someone landed first; see *Rebasing* below.
-
-**8. Push and open the pull request.**
-
-```sh
-git push -u origin <branch>
-gh pr create --repo leansolving/SqueezeBench --base main
-```
-
-Without the GitHub CLI, open the pull request from your fork's page on GitHub.
-
-**9. Wait for the review.** A maintainer runs the same verification from a fresh checkout,
-reads your `REPORT.md` and merges. To change something, commit and push to the same branch;
-the pull request updates itself.
-
-## The Challenge fixes your statement
-
-You do not write the statements. For each version of each problem and direction the
-repository carries a trusted **Challenge**, `Challenges/<Problem>/<Direction>/V<k>.lean`,
-which declares the record as a hole and states the three obligations against it, naming
-the previous record by version:
+Each problem has two tracks, `Lower` and `Upper`, numbered independently: `V000`, `V001`, …
+For the next version of a track the repository holds a **Challenge**,
+`Challenges/<Problem>/<Direction>/V<k>.lean`. It fixes four declarations and leaves them open:
 
 ```lean
-import SqueezeBench.Core
-import SqueezeBench.Problems.Golomb.Records.Upper.V000.Def
-
 namespace SqueezeBench.Golomb.Upper.V001
 
 def record : SqueezeBench.BoundFn := sorry
@@ -162,75 +22,135 @@ theorem strict :
 end SqueezeBench.Golomb.Upper.V001
 ```
 
-Your two files open the *same namespace* and fill the four declarations in. `record` goes
-in `Def.lean`:
+You fill them in. For a lower record against the previous record `prev`:
 
-```lean
-import SqueezeBench.Problems.Golomb.Records.Upper.V000.Def
+| declaration | meaning |
+|---|---|
+| `record` | your bound, a function `ℕ → ℕ` |
+| `valid` | it bounds `f`: `∀ n, record n ≤ f n` |
+| `improves` | it is no worse anywhere: `∀ n, prev n ≤ record n` |
+| `strict` | it is better somewhere: `∃ n₀ ≥ nMin, prev n₀ < record n₀` |
 
-namespace SqueezeBench.Golomb.Upper.V001
+Upper records reverse the inequalities. Only `valid` is mathematics. The idioms below make
+`improves` and `strict` one line each.
 
-def record : SqueezeBench.BoundFn := SqueezeBench.patch SqueezeBench.Golomb.Upper.V000.record 7 25
+Your submission is one new directory. When it is merged, that directory *is* the record:
 
-end SqueezeBench.Golomb.Upper.V001
+```
+SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>/
+├── Def.lean          -- `def record`, and nothing but definitions
+├── Proof.lean        -- `valid`, `improves`, `strict`, and any helpers
+├── metadata.toml     -- your name, the witness, and the versions you built on
+└── REPORT.md         -- how you obtained the record, your setup and your sources
 ```
 
-and the three theorems in `Proof.lean`, which imports your `Def.lean` and the previous
-version's `Proof.lean`:
+A worked example is `SqueezeBench/Problems/Tutorial/Records/Lower/V001/` (patch idiom);
+`Fixtures/Tutorial/Bob/` shows the `maxWith` idiom.
 
-```lean
-import SqueezeBench.Problems.Golomb.Records.Upper.V001.Def
-import SqueezeBench.Problems.Golomb.Records.Upper.V000.Proof
+## Submitting, step by step
 
-namespace SqueezeBench.Golomb.Upper.V001
+`<Problem>` is the problem, `<Direction>` is `Lower` or `Upper`, `V<k>` is the open version (the
+highest Challenge in the tree). Run everything from the project root.
 
-theorem valid : SqueezeBench.UpperBoundHolds SqueezeBench.Golomb.f record := ...
-theorem improves : SqueezeBench.ImprovesUpper SqueezeBench.Golomb.Upper.V000.record record := ...
-theorem strict :
-    SqueezeBench.StrictlyImprovesUpper SqueezeBench.Golomb.nMin SqueezeBench.Golomb.Upper.V000.record record := ...
+**1. Fork and clone.**
 
-end SqueezeBench.Golomb.Upper.V001
+```sh
+gh repo fork leansolving/SqueezeBench --clone     # or fork on GitHub, clone, and add `upstream`
+cd SqueezeBench
 ```
 
-Two things will bite you if you improvise:
+**2. Set up, once per machine.** The requirements are in the [README](../README.md).
 
-- **Copy the declared types verbatim from the Challenge.** `record : BoundFn` and
-  `record : ℕ → ℕ` are *not* interchangeable — they store `SqueezeBench.BoundFn` and `Nat -> Nat`
-  respectively, and unfolding the abbreviation fails the check with no obvious reason.
-- **Write the statements fully qualified, as the Challenge does.** If you `open SqueezeBench.Golomb`
-  and write `UpperBoundHolds f record`, and anything in your file happens to define `f`,
-  your theorem is about *your* `f` and will be rejected. The check is on the elaborated
-  type, so this is caught, but the error will be clearer if you never invite it.
-
-The three obligations, for a lower record against the previous record `prev`:
-
-```lean
-theorem valid    : LowerBoundHolds f record          -- ∀ n, record n ≤ f n
-theorem improves : ImprovesLower prev record         -- ∀ n, prev n ≤ record n
-theorem strict   : StrictlyImprovesLower nMin prev record
-                                                     -- ∃ n₀ ≥ nMin, prev n₀ < record n₀
+```sh
+lake exe cache get           # prebuilt Mathlib
+lake build
+lake exe squeeze bootstrap   # the verifier tools; Linux only, needs cargo
 ```
 
-Lower and upper records are separate tracks with independent version numbers, so improving
-one has nothing to do with the other. Upper bounds use `UpperBoundHolds`, `ImprovesUpper`,
-`StrictlyImprovesUpper`, with the inequalities reversed.
+**3. Branch from the current `main`.**
 
-Only `valid` should ever be hard. It is the mathematics — everything else is mechanical if
-you use one of the two idioms below.
+```sh
+git fetch upstream
+git checkout -b <branch> upstream/main
+```
 
-## Why `Def.lean` may hold only definitions
+**4. Lay out the record.** The tool asks for anything you leave out; `--help` lists the options.
 
-The next Challenge imports your `Def.lean`, and commands such as `macro_rules`, `notation`,
-`instance` or attributes would change what that Challenge means. So `Def.lean` holds only plain
-`def` and `abbrev` (plus doc comments, `open`, `set_option`, `namespace … end`) and imports only
-Lean, Mathlib, `SqueezeBench.Core`, the problem's `Def` and `Finite`, and the previous
-version's `Def.lean`. `Proof.lean` may contain anything; put helpers that need attributes there.
+```sh
+lake exe squeeze new <Problem> <lower|upper>
+lake exe squeeze new Golomb upper --name "Alice Smith" --idiom patch --at 7 --value 25   # all at once
+```
+
+It writes the four files with the namespace and statements copied from the Challenge. With
+`--idiom patch` or `--idiom fold` it also writes the record and the mechanical proofs, and
+leaves you the mathematics.
+
+**5. Write the record.** Fill in `Def.lean`, `Proof.lean`, `REPORT.md` and the `witness` in
+`metadata.toml`, then build:
+
+```sh
+lake build SqueezeBench.Problems.<Problem>.Records.<Direction>.V<k>.Proof
+```
+
+**6. Commit your directory and nothing else.**
+
+```sh
+git add SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>
+git commit -m "<Problem> <Direction> V<k>"
+```
+
+**7. Verify.** This is the command the maintainers run. It must end with exit code 0. Exit
+code 3 means someone landed first; see *Rebasing*.
+
+```sh
+lake exe squeeze verify SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k> --base upstream/main
+```
+
+**8. Open the pull request.**
+
+```sh
+git push -u origin <branch>
+gh pr create --repo leansolving/SqueezeBench --base main
+```
+
+**9. Wait for the review.** A maintainer runs the same verification from a fresh checkout,
+reads your `REPORT.md` and merges. To change something, push to the same branch.
+
+## The four files
+
+**`Def.lean`** holds `record`. The next Challenge imports this file, so it may contain only
+plain `def` and `abbrev` (plus doc comments, `open`, `set_option`, `namespace … end`). It may
+import only Lean, Mathlib, `SqueezeBench.Core`, the problem's `Def` and `Finite`, and the
+previous version's `Def.lean`.
+
+**`Proof.lean`** holds the three theorems and your helpers. It imports your `Def.lean` and
+the previous version's `Proof.lean`.
+
+In both files, keep the statements exactly as the Challenge has them:
+
+- **Copy the types verbatim.** `record : BoundFn` and `record : ℕ → ℕ` are not
+  interchangeable; the second fails the check.
+- **Keep the names fully qualified.** If you `open SqueezeBench.Golomb` and your file defines
+  its own `f`, your theorem is about your `f` and is rejected.
+
+**`metadata.toml`**:
+
+```toml
+name     = "Alice Smith"     # how you are credited
+witness  = 7                 # one n₀ ≥ nMin where your record beats the previous one
+based-on = ["V001"]          # versions whose code you reused; "<Problem>/<Dir>/V<k>" for another track
+```
+
+Give one witness even if you improve everywhere. Choose an `n` that is cheap to evaluate.
+
+**`REPORT.md`** says how you found the bound and its proofs (by hand, with an AI agent, with
+automation), from which sources, and your setup: models and agents, machine, time spent, and
+any computation outside Lean. The reviewer reads it before merging.
 
 ## Idiom 1 — improve at a point
 
-You proved a new exact value, or a better bound at one `n`. Patch the record there. With
-`prev` standing for `SqueezeBench.<Problem>.<Direction>.V<k-1>.record` and `prev_valid` for the
-`.valid` beside it:
+You have a better bound at one `n`. Patch the record there. Here `prev` is
+`SqueezeBench.<Problem>.<Direction>.V<k-1>.record` and `prev_valid` is the `.valid` beside it.
 
 ```lean
 -- Def.lean
@@ -244,12 +164,12 @@ theorem strict   : SqueezeBench.StrictlyImprovesLower SqueezeBench.<Problem>.nMi
   SqueezeBench.patch_strict (by decide) (by decide)
 ```
 
-Upper bounds use the primed lemmas `patch_valid'`, `patch_improves'`, `patch_strict'`.
+Upper bounds use `patch_valid'`, `patch_improves'`, `patch_strict'`.
 
 ## Idiom 2 — fold in an unrelated bound
 
-You proved a bound `v` that beats the record *somewhere* but you have no idea how it
-compares elsewhere. Take the pointwise max — you never have to find out:
+You have a bound `v` that beats the record somewhere, and you do not know how it compares
+elsewhere. Take the pointwise max; then `improves` holds unconditionally.
 
 ```lean
 -- Def.lean
@@ -264,198 +184,146 @@ theorem strict   : SqueezeBench.StrictlyImprovesLower SqueezeBench.<Problem>.nMi
   SqueezeBench.maxWith_strict (nMin := SqueezeBench.<Problem>.nMin) (n₀ := /- your n₀ -/) (by decide) (by decide)
 ```
 
-`maxWith_improves` is `le_max_left` and holds unconditionally, so **obligation (ii) is never
-a reason you cannot contribute**. Upper bounds use `minWith` / `minWith_improves`.
+Upper bounds use `minWith` and its lemmas.
+
+## Idiom 3 — a wholesale closed form
+
+If you can prove that your function dominates the record everywhere, submit it directly and
+prove `improves` yourself. The record is cleaner, but there is no automation for it. If the
+proof resists, use Idiom 2.
 
 ## Pad your lower bounds below `nMin`
 
-`f` is pinned to `0` below the problem's `nMin`, but `LowerBoundHolds` quantifies over
-**every** `n`. So a lower bound must vanish there too — `fun n => 2 ^ n` is *not* a valid
-lower record for any problem, because it is `1` at `n = 0` where `f` is `0`. This catches
-people out; the natural closed form from the literature is almost never valid as written.
-
-Use `pin`, which does the padding and reduces the obligation to the range that matters:
+`f` is `0` below the problem's `nMin`, and `valid` quantifies over every `n`. So a lower
+record must be `0` there too: `fun n => 2 ^ n` is never a valid lower record, because it is
+`1` at `n = 0`. Use `pin`:
 
 ```lean
 def record : SqueezeBench.BoundFn := SqueezeBench.pin SqueezeBench.<Problem>.nMin (fun n => /- your bound, valid for n ≥ nMin -/)
 
 theorem valid : SqueezeBench.LowerBoundHolds SqueezeBench.<Problem>.f record :=
-  SqueezeBench.pin_lowerBoundHolds (by intro n hn; /- your proof, with `hn : nMin ≤ n` available -/)
+  SqueezeBench.pin_lowerBoundHolds (by intro n hn; /- your proof, with `hn : nMin ≤ n` -/)
 ```
 
-Upper bounds need no padding: below `nMin` the goal is `f n ≤ u n` with `f n = 0`, which
-holds for anything.
-
-## Idiom 3 — a wholesale closed form
-
-If you can prove your function dominates the record everywhere, submit it directly and
-prove `improves` yourself. This produces a much cleaner record and is encouraged when the
-mathematics supports it — but it is genuinely harder, and there is no automation for it.
-Note that comparing two arbitrary closed forms over all `n` is not decidable in general
-(`DESIGN.md` §1.2), so if the proof resists, fall back to Idiom 2.
-
-## The witness
-
-`witness` in `metadata.toml` is one `n₀ ≥ nMin` at which your record beats the previous one:
-the `n₀` of `strict`. Even if you improve everywhere, give one witness; the "everywhere" is
-carried by `improves` and by the record itself. The fuel gate evaluates both records there,
-and `accept` shows the before and after values, so choose a telling `n` that is cheap to
-evaluate. A record without a witness is rejected.
+Upper bounds need no padding.
 
 ## Two traps that will cost you time
 
-**Write bound functions in ℕ arithmetic.** You may prove `strict` any way you like, but
-the fuel gate checks your witness comparison by `decide +kernel`, and the next submitter
-will normally prove their `strict` against your record by computation too. `Nat`
-arithmetic and comparison are kernel-accelerated GMP primitives and reduce fast. **`Rat` is
-a trap**: plain `decide` gets stuck on `Rat.instDecidableLt`, because the elaborator cannot unfold it, while `decide +kernel` proves
-the same goal. A later submitter who reaches for plain `decide` will fail. If your bound is
-naturally rational (`2.2202ⁿ`, say), expose a ℕ-valued wrapper rather than making the
-record itself ℚ-valued.
+**Write the record in ℕ arithmetic.** The verifier and later submitters compare records by
+`decide`. `Nat` reduces fast in the kernel; `Rat` gets plain `decide` stuck. If your bound is
+naturally rational (`2.2202ⁿ`, say), expose a ℕ-valued function.
 
-**Keep evaluation cheap.** `squeeze verify` runs its own probe,
-`prev n₀ < record n₀ := by decide +kernel` (`>` for an upper bound) at your witness,
-independent of how you proved `strict`, under `set_option maxHeartbeats` set to the problem's
-`fuel-budget-heartbeats` and with Lean's memory capped at 8 GB, and rejects your record if it
-fails (`DESIGN.md` §5.2 gate 5). It then settles `0 ≤ record n`, which evaluates your record,
-the same way at every `n` from `nMin` to the problem's `fuel-range-max` (default 100), so your
-record must be cheap at every small `n`, not only at the witness. A record that searches for
-`f` fails here. Heartbeats count work, not time, so you get the same result
-on your machine as the maintainer does. Note it is the
-kernel, not `#eval` — a record only the compiler can evaluate blocks every submission built
-on top of yours, which is the whole reason the gate exists. Writing `2.2202ⁿ` as
-`22202^n / 10000^n` produces astronomically large intermediates and will exhaust the budget; use an
-iterative recurrence instead. The record also delegates to its predecessor, so the chain
-itself costs something.
+**Keep evaluation cheap.** `squeeze verify` evaluates your record in the kernel, by
+`decide +kernel`: at your witness against the previous record, and at every `n` from `nMin` to
+the problem's `fuel-range-max` (default 100). Each check runs under the problem's
+`fuel-budget-heartbeats` with memory capped at 8 GB. A record that searches for `f` fails
+here. So does one with huge intermediates: `22202^n / 10000^n` exhausts the budget; use a
+recurrence instead.
 
 ## Rules your submission must satisfy
 
-- Builds against the pinned toolchain (`lean-toolchain`, `lake-manifest.json`).
-- No `sorry`, `admit`, fresh `axiom`, or native evaluation (`native_decide`, `bv_decide`,
-  `bv_check`); see *Kernel-checked proofs only* below.
-- The axiom closure of all three theorems lies inside
-  `{propext, Classical.choice, Quot.sound}`.
-- `Def.lean` holds only plain `def` and `abbrev`, and imports only the trusted spine and the
-  previous version's `Def.lean` (see above).
-- Your record function is **computable** and its definition does **not** mention `f` or any
-  constant the problem marks as an oracle. (Your *proofs* may mention `f` freely — they
-  must.) Submitting `record := f` is rejected here.
-- The witness `n₀` satisfies `n₀ ≥ nMin`. You get this for free by copying the Challenge's
-  statement, which names the problem's own `nMin`; writing a numeral there instead is
-  rejected as a statement mismatch.
-- `Def.lean` is at most 64 KB and your record directory at most 1 MB, unless the problem's
-  `problem.toml` sets other limits (`max-def-bytes`, `max-record-bytes`).
-- Comparator checks the whole submission within 30 minutes and 16 GB of memory.
-- `Proof.lean` keeps to the computation budget: at most 200000 heartbeats per declaration and
-  200000 for the whole file, with no `set_option` beyond `linter.*` and `pp.*`; see
-  *Computation budget* below.
-- Your pull request adds nothing outside your record directory.
-- Outside code is under a license compatible with Apache-2.0, keeps its notices, and is listed
-  with all other outside sources under `## Sources` in `REPORT.md` (checked at review; see
-  *License and outside sources* below).
+`squeeze verify` checks all of these except the last.
 
-### How these are checked
+- The pull request adds your record directory and touches nothing else.
+- It builds against the pinned toolchain.
+- No `sorry`, `admit`, new `axiom`, or native evaluation (`native_decide`, `bv_decide`,
+  `bv_check`). The axioms of the three theorems lie inside
+  `{propext, Classical.choice, Quot.sound}`. Every proof is checked by the kernel, so a SAT
+  certificate checked by compiled code is rejected too.
+- `Def.lean` holds only definitions and the allowed imports (see *The four files*).
+- `record` is computable and its definition does not mention `f` or any constant the problem
+  lists as an oracle. Your proofs may mention `f` freely.
+- The statements match the Challenge, including the problem's own `nMin` in `strict`.
+- `Def.lean` is at most 64 KB and the directory at most 1 MB, unless `problem.toml` says
+  otherwise.
+- Comparator finishes within 30 minutes and 16 GB of memory.
+- `Proof.lean` keeps to the computation budget below.
+- Outside code and data are licensed compatibly and listed in `REPORT.md` (checked at review).
 
-All of it, by `lake exe squeeze verify`, which is what CI runs:
+Verification is **Linux-only** and must not run as root. On macOS or Windows you can build
+your proofs, but `verify` has to run on Linux.
 
-```sh
-lake exe squeeze verify SqueezeBench/Problems/Golomb/Records/Upper/V001 --base main
-```
+## How your submission is verified
 
-It runs five gates — the diff restriction, the size limits and the `Def.lean` restriction
-(parsed, never elaborated), then [Comparator](https://github.com/leanprover/comparator) (which builds your record in
-a sandbox, checks it proves the Challenge's statements, checks the axioms, and replays the
-proof through two independent kernels), then the admissibility gates against the problem's
-own oracle list, then the fuel budget.
+`lake exe squeeze verify` first checks that your version is still the open one. If not, it
+stops with exit code 3 (see *Rebasing*). Then it runs six gates, in order:
 
-The same command, with `--accepted`, re-verifies every accepted record, and `lake exe squeeze audit` runs it over
-all of them: the Challenge that judged your record stays in the tree, so anyone can re-run
-the judgement on any clone.
+1. **Diff restriction.** The pull request touches nothing outside your record directory.
+   Skipped when you run `verify` without `--base`.
+2. **Size limits and the `Def.lean` check.** The file is parsed, not run: only plain `def`
+   and `abbrev`, only the allowed imports.
+3. **Comparator.** See below. Limited to 30 minutes and 16 GB.
+4. **Computation budget.** `Proof.lean` is elaborated again with the heartbeats counted,
+   under 8 GB.
+5. **Admissibility.** `record` is computable and its definition reaches neither `f` nor any
+   oracle in `Challenges/<Problem>/problem.toml`.
+6. **Fuel budget.** The kernel evaluates your record at the witness and at every `n` from
+   `nMin` to `fuel-range-max`.
 
-You do **not** write a `#check_admissible` line. The oracle list comes from
-`Challenges/<Problem>/problem.toml`, which your pull request may not touch.
+Exit codes: `0` accepted, `1` rejected, `2` wrong arguments or missing tools, `3` rebase
+needed.
 
-Run `lake exe squeeze bootstrap` once first: it builds the pinned verifier tools (`comparator`,
-`lean4export`, `landrun`, `nanoda`) into a git-ignored `.tools/`, and needs `cargo`.
+[Comparator](https://github.com/leanprover/comparator) is the judge, used unmodified. It
+builds the Challenge and your record in sandboxes and compares them. When it succeeds:
 
-**This is Linux-only.** Comparator sandboxes with `landrun`, which needs Landlock, and must
-not run as root. On macOS or Windows you can still `lake build` and inspect your proofs, but
-the verification itself has to happen on Linux or in CI.
+- your four declarations have exactly the types the Challenge states;
+- everything those types mention (`f`, `nMin`, the previous record) is unchanged, so a local
+  `f` that shadows the real one is caught;
+- the proofs use no axiom outside `propext`, `Quot.sound` and `Classical.choice`;
+- two independent kernels accept the proofs: Lean's own and
+  [nanoda](https://github.com/robsimmons/nanoda_lib).
 
-## License and outside sources
-
-SqueezeBench is licensed under the Apache License 2.0 ([`LICENSE`](../LICENSE)), the
-license of Lean and Mathlib. By opening a pull request you license your submission, all four
-files, under the same terms, and you confirm that you have the right to do so.
-
-You may build on other people's work. Code taken or adapted from outside this repository must
-come under a license compatible with Apache-2.0: Apache-2.0 itself, MIT or BSD. Code under the
-GPL, under a non-commercial or no-derivatives license, or with no license at all cannot be
-accepted. In every file that contains such code, keep the original copyright and attribution
-notices and add a comment that names the source and says that you changed it. If the source
-is under a license other than Apache-2.0, add a copy of that license to `LICENSES/`; if it
-comes with a `NOTICE` file, copy its attribution notices into your `REPORT.md`. Mathematical
-data, such as a table of values, a graph or a cap, may be used with a citation.
-
-List every outside source of code or data in `REPORT.md` under a heading `## Sources`: the URL,
-pinned to a commit or a version, the license, and what you took from it. This includes code
-that an AI system retrieved for you. The maintainer checks this section at review;
-`squeeze verify` does not. If undisclosed outside code turns up after acceptance, the
-maintainers add the missing notices.
-
-## Kernel-checked proofs only
-
-Every proof must be checked by Lean's kernel. `native_decide`, `bv_decide` and `bv_check`
-each add an axiom stating what compiled code returned, which no kernel can check, so
-Comparator rejects a record whose theorems reach one. This includes a SAT solver's LRAT
-certificate checked in Lean with compiled code. `Fixtures/Tutorial/BvCheck` and
-`Fixtures/Tutorial/PlainNativeDecide` are examples of what is rejected. Why:
-[`COMPARATOR.md`](COMPARATOR.md) §7.
+Comparator alone is not enough. `def record := f` passes it: the statements match and the
+proofs are true. But nobody could evaluate that record, so nobody could ever beat it. Gates 5
+and 6 exist for this. A record must be computable, must not be `f` under another name, and
+must be cheap at every small `n`, so the next submitter can build on it.
 
 ## Computation budget
 
-Proofs here reason, as on paper; computation may only check data your record provides. A
-`decide +kernel` that checks a construction or a small table is fine; one that searches (every
-subset, every colouring, every ruler) is not, however it is split up. `squeeze verify`
-enforces this by measurement (`DESIGN.md` §5.6):
+Proofs here reason, as on paper. Computation may check data your record provides, such as a
+construction or a small table. It may not search (every subset, every colouring, every
+ruler), however the search is split up. `squeeze verify` enforces this by measurement:
 
-- each declaration of `Proof.lean` runs under 200000 heartbeats, Lean's default, and you
-  cannot raise it: `set_option` is allowed for `linter.*` and `pp.*` only;
-- the heartbeats of all declarations together must stay within 200000 as well, about five
-  times what the heaviest baseline proof without a search needed;
+- each declaration of `Proof.lean` runs under 200000 heartbeats, and so does the whole file
+  in total;
+- `set_option` is allowed for `linter.*` and `pp.*` only, so you cannot raise the limit;
 - no command or attribute that runs code at elaboration time (`#eval`, `run_cmd`, `elab`,
-  `macro`, `syntax`, `notation`, `@[tactic]`, `@[init]`, …); allowed attributes are `simp`,
+  `macro`, `syntax`, `notation`, `@[tactic]`, `@[init]`, …). Allowed attributes are `simp`,
   `instance`, `ext`, `reducible`, `irreducible`, `semireducible` and `inline`.
 
-The kernel's work counts, so a heavy `decide +kernel` shows up. To see where your budget goes,
-run the probe yourself:
+To see where your budget goes:
 
 ```sh
 lake exe squeeze budget-probe SqueezeBench/Problems/<P>/Records/<Dir>/V<k>/Proof.lean
 ```
 
-It prints the heartbeats of each command and the total as JSON. If a lemma needs more, prove
-it by reasoning rather than evaluation; the budget is the same for everyone and is not raised
-per record.
-
 ## Rebasing
 
-If someone else lands first, the version you wrote against is no longer open:
-`Challenges/<Problem>/<Direction>/V<k+1>.lean` now exists, and `squeeze verify` stops before
-any gate (exit code 3) with a `REBASE:` message rather than rejecting you. Rename your
-directory to `V<k+1>`, and in both files replace `V<k>` by `V<k+1>` in the namespace line
-and `V<k-1>` by `V<k>` in every reference to the previous record. For Idiom 2 the proofs
-are then unchanged. For Idiom 1 you need to re-check `patch_improves` at your point against
-the new record.
+If someone else lands first, `V<k+1>` is now the open version and `squeeze verify` stops with
+exit code 3 and a `REBASE:` message. Rename your directory to `V<k+1>`. In both files replace
+`V<k>` by `V<k+1>` in the namespace and `V<k-1>` by `V<k>` in every reference to the previous
+record. With Idiom 2 the proofs are unchanged. With Idiom 1, check `patch_improves` again at
+your point.
 
-## Building
+## License and outside sources
 
-Requires [`elan`](https://github.com/leanprover/elan).
+SqueezeBench is under the Apache License 2.0 ([`LICENSE`](../LICENSE)). By opening a pull
+request you license your four files under the same terms and confirm you have the right to.
 
-```sh
-lake exe cache get   # prebuilt Mathlib, first time only
-lake build
-```
+You may build on other people's work:
 
-Your directory sits inside the default build target, so `lake build` compiles it; until
-the holes are filled it builds with `sorry` warnings, which is expected.
+- **Code** from outside this repository must be under Apache-2.0, MIT or BSD. GPL,
+  non-commercial, no-derivatives and unlicensed code cannot be accepted.
+- In each file with such code, keep the original copyright notices and add a comment naming
+  the source and saying that you changed it. For a license other than Apache-2.0, add a copy
+  to `LICENSES/`. If the source has a `NOTICE` file, copy its notices into `REPORT.md`.
+- **Data**, such as a table of values, a graph or a cap, may be used with a citation.
+- List every outside source under `## Sources` in `REPORT.md`: the URL pinned to a commit or
+  version, the license, and what you took. This includes code an AI system retrieved for you.
+- Code reused from earlier versions in this repository goes in `based-on` in `metadata.toml`.
+
+## After the merge
+
+A maintainer runs `lake exe squeeze accept`. It opens the next Challenge and adds a row to the
+problem README's *Record history*: the date, your name, the versions you built on, your
+witness, and the value before and after.

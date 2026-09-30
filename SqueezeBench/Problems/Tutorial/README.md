@@ -15,7 +15,7 @@ idioms, and the admissibility gates. It is **not on any leaderboard**.
 `decide` and watch the whole workflow run — and a bad benchmark, because the interesting
 part of a real problem is precisely that `f` cannot be evaluated.
 
-The ten real problems (`docs/DESIGN.md` §6) have noncomputable or intractable `f`, and each
+The ten real problems (listed in the project README) have noncomputable or intractable `f`, and each
 needs its own formalisation before any bound can be stated.
 
 ## Known values

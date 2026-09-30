@@ -11,7 +11,7 @@ gives `n · exp(−c√(log n))` from below; the best upper bound is Bloom–Sis
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2) — except that
+**Reporting only. These are never a source of theorems** — except that
 here, unusually, the first four *are* theorems: `f` is computable, so `Def.lean` checks them
 with `decide` on every build.
 

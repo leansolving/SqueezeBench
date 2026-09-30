@@ -1,7 +1,7 @@
 # Testing submissions while the repository is private
 
-> **Temporary.** This file is for maintainers. Delete it when the repository becomes public,
-> and move *As the maintainer* to [`PIPELINE.md`](PIPELINE.md).
+> **Temporary.** This file is for maintainers. When the repository becomes public, remove
+> *As the submitter* and keep the rest as the maintainer guide.
 
 [`CONTRIBUTING.md`](CONTRIBUTING.md) describes a submission from a fork.
 Forking is disabled while the repository is private, so a test submission comes from a branch
@@ -68,6 +68,33 @@ leaderboard.
 
 Also test submissions that must fail: one that changes a file outside its record directory,
 and one copied from a fixture under `Fixtures/` that is expected to be rejected.
+
+## Checking the repository
+
+```sh
+lake exe squeeze audit                     # re-verify every accepted record; slow
+lake exe squeeze audit Golomb upper V000   # or narrow it: a problem, a direction, one version
+lake exe squeeze test                      # verify every fixture and check its expected result
+```
+
+`audit` judges each record against the Challenge that admitted it. `accept` never edits a
+record; it opens the next Challenge and updates the problem README.
+
+The fixtures are in `Fixtures/Tutorial/`:
+
+| fixture | expected |
+|---|---|
+| `Bob` | accepted |
+| `StaleAgainstV001` | rebase: it answers a version already accepted |
+| `MacroInDef` | rejected by the `Def.lean` check |
+| `TooLarge` | rejected by the size limit |
+| `ShadowedF` | rejected by Comparator: a local `f` changes the statement |
+| `RecordIsF` | accepted by Comparator, rejected by admissibility |
+| `WrongWitness` | rejected by the fuel gate |
+| `SearchUnderAnotherName` | rejected by the fuel gate's range check, at `n = 13` |
+| `HeartbeatOverride`, `AsyncOverride`, `MetaCommand` | rejected by the computation budget: the file tries to change its limits |
+| `SplitSearch` | rejected by the computation budget: every lemma is within its limit, the file is not |
+| `BvCheck`, `PlainNativeDecide` | rejected by Comparator's axiom check |
 
 ## Maybe in the future: Requiring pull requests
 

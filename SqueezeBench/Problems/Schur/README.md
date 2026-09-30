@@ -19,7 +19,7 @@ you mean.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2): proving
+**Reporting only. These are never a source of theorems**: proving
 `S(5) = 160` in Lean would mean redoing Heule's SAT proof.
 
 | k | f(k) | source |

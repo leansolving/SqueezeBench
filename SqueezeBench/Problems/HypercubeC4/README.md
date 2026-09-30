@@ -28,7 +28,7 @@ The leading constant is open between `0.5` and `0.603`.
 
 ## Known values
 
-**Reporting only. These are never a source of theorems** (`docs/DESIGN.md` §2.2).
+**Reporting only. These are never a source of theorems.**
 
 | n | 1 | 2 | 3 | 4 | 5 | 6 | 7 |
 |---|---|---|---|---|---|---|---|
