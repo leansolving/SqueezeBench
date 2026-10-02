@@ -7,13 +7,14 @@ By Pablo Manrique.
 With `R8 = V008.record`:
 
 ```
-tAux n   = R8 n                                                    for n < 15
-tAux n   = max ( R8 n , 15 , 90 · tAux ⌊n/15⌋ , [n ≥ 27] max(45, 270 · tAux ⌊n/27⌋) )   otherwise
-sAux k n = max over 1 ≤ j ≤ k of  tAux (n - n mod 3^j) + tAux (n mod 3^j),   and tAux n
+tb n     = R8 n                                                    for n < 15
+tb n     = max ( R8 n , 15 , 90 · tb ⌊n/15⌋ , [n ≥ 27] max(45, 270 · tb ⌊n/27⌋) )   otherwise
+sAux k n = max ( tb n , max over 1 ≤ j ≤ k of  tb (n - n mod 3^j) + tb (n mod 3^j) )
 record n = sAux ⌊log₃ n⌋ n
 ```
 
-(`tAux` is computed by fuel recursion `tAux n n`; `tb n := tAux n n` in `Def.lean`.)
+(In `Def.lean`, `tb n := tAux n n` is computed by fuel recursion; the fuel `n` exceeds the
+recursion depth, which is at most `log₁₅ n`, so it never runs out.)
 
 **Witness.** `n₀ = 15`: `V008 = 10 → V009 = 15` (the Kneser graph `KG(6,2)`). Upper V008 is
 `15` at `n = 15` and `45` at `n = 27`, so with V009 the two records determine `f(15) = 15` and
@@ -41,13 +42,14 @@ do not produce.
    the tritangent planes `{aᵢ, bⱼ, c_ij}` (30) and `{c_ij, c_kl, c_mn}` (15). `f(27) ≥ 45`, where
    V008 has `36`.
 
-Both small graphs meet the upper bound `n(n+3)/18`, which is the upper record at `15` and `27`,
-so `f(15) = 15` and `f(27) = 45` are now settled by the two records. Their value as tensor factors comes from
+At `n = 15` and `n = 27` the upper record V008 evaluates to `15` and `45`, so
+`f(15) = 15` and `f(27) = 45` are now settled by the two records. Their value as tensor factors comes from
 `g(n) = 6 f(n)/n`, which is multiplicative under the product: `g = 6` at `n = 15` and `g = 10` at
 `n = 27`, against `g = 4` at `9` and `g = 8` at `27` for the cap constructions. In particular for
 every `j ≥ 1`, at `n = 15 · 3^j` the record is at least `90 · V008(3^j)`, and the gain over V008
-there lies between `1.2` and `1.5` for every `j ≤ 15` (Python model; the pattern repeats with
-`j mod 6`, following the cap sizes): an infinite family with a gain of at least `1.2`. `GQ(2,4)` gains `1.25` at
+there lies between `1.2` and `1.5` for every `j ≤ 15` (Python model). The gains appear to repeat
+with period 6 in `j`, following the cap sizes, which would give an infinite family with a gain
+of at least `1.2`; this is observed numerically, not proved. `GQ(2,4)` gains `1.25` at
 `n = 27 · 729^q` (`10` against `symr 3 = 8`).
 
 The tensor product with V008 itself gave nothing in a numerical test (`n < 20000`), and neither
@@ -111,7 +113,7 @@ had to be instantiated explicitly.
   at its size is a new tensor factor. The Cossidente–Penttila graph SRG(378,52,1,8) has
   `3276` triangles on `378` vertices, against V009's `2340` there; it would need a structured
   description (it comes from a hemisystem of a Hermitian surface, Cossidente–Penttila 2005),
-  since a mask check of `378 · 52 · 378` lookups is beyond the budget.
+  since a mask check of `378³ ≈ 5.4 · 10⁷` bit lookups is beyond the budget.
 * **Exact small values as factors.** The README's exhaustive values `f(12) = 9`, `f(13) = 10`
   (both above the record) would, as further tensor factors, raise the share of `n < 20000` where
   the tensor part alone beats V008 from 51% to 63% (Python model); they need explicit graphs.

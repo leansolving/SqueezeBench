@@ -12,7 +12,7 @@ V001–V008 do not reach.
 * **`KG(6,2)`**, the collinearity graph of the generalized quadrangle `GQ(2,2)`: `15` vertices,
   `15` triangles (V008 has `10` at `n = 15`); and the collinearity graph of **`GQ(2,4)`** (the
   intersection graph of the 27 lines on a cubic surface, triangles = tritangent planes): `27`
-  vertices, `45` triangles (V008 has `36`). Both meet the upper bound `n (n + 3) / 18`.
+  vertices, `45` triangles (V008 has `36`). Upper V008 is `15` and `45` at these `n`.
 
 `tAux` multiplies V008 by the two small graphs recursively, `f n ≥ 6 · 15 · f ⌊n/15⌋` and
 `f n ≥ 6 · 45 · f ⌊n/27⌋` (the factor alone, `15` or `45`, when the cofactor is too small to carry a
