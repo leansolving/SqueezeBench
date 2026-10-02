@@ -83,7 +83,7 @@ triangle removal lemma, which is far out of formalisation reach today.
 | | |
 |---|---|
 | Well posed | **yes** — total by construction |
-| Lower record | `Records/Lower/V008/` — beats V007 at witness `21` (trial claude-fable; based on V006, V007, 2026-09-25) |
+| Lower record | `Records/Lower/V009/` — beats V008 at witness `15` (Pablo Manrique; based on V007, V008, 2026-10-02) |
 | Upper record | `Records/Upper/V008/` — beats V007 at witness `40` (trial claude-fable; based on V001, V002, V003, V004, V005, V006, V007, 2026-09-25) |
 | Live | **yes** — both Challenges open at `V001` |
 
@@ -104,6 +104,7 @@ The author is the `name` in the record's `metadata.toml`.
 | V006 | 2026-09-24 | baseline claude-opus-5; based on V001, V004, V005 | 417 | 2502 → 2780 |
 | V007 | 2026-09-25 | trial claude-fable; based on V006 | 729 | 7533 → 13608 |
 | V008 | 2026-09-25 | trial claude-fable; based on V006, V007 | 21 | 14 → 21 |
+| V009 | 2026-10-02 | Pablo Manrique; based on V007, V008 | 15 | 10 → 15 |
 
 ### Upper
 
