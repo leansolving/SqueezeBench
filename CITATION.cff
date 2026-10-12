@@ -1,0 +1,30 @@
+cff-version: 1.2.0
+message: "If you use SqueezeBench in your research, please cite the accompanying paper."
+title: "SqueezeBench"
+abstract: "A benchmark of Lean-verified bounds on extremal combinatorics problems."
+type: software
+authors:
+  - family-names: Manrique
+    given-names: Pablo
+  - family-names: Xia
+    given-names: Hai
+  - family-names: Szeider
+    given-names: Stefan
+repository-code: "https://github.com/leansolving/SqueezeBench"
+license: Apache-2.0
+preferred-citation:
+  type: article
+  title: "SqueezeBench: Saturation-Resilient Evaluation of Mathematical Capability"
+  authors:
+    - family-names: Manrique
+      given-names: Pablo
+    - family-names: Xia
+      given-names: Hai
+    - family-names: Szeider
+      given-names: Stefan
+  year: 2026
+  journal: "arXiv preprint"
+  identifiers:
+    - type: other
+      value: "arXiv:2610.13461"
+  url: "https://arxiv.org/abs/2610.13461"

@@ -30,8 +30,9 @@ Thumbs.db
 
 # Local-only output
 leaderboard-cache/
-write_up/ICLR/manuscript/references.md
 *.log
+
+notes/
 
 # Pinned verification tools built by `lake exe squeeze bootstrap` (never committed)
 .tools/

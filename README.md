@@ -128,7 +128,25 @@ scripts/                   -- builds the verifier tools
 
 ## Citing SqueezeBench
 
-**TODO: add citation to the arXiV paper once available.**
+If you use SqueezeBench in your research, please cite the accompanying paper:
+
+> Pablo Manrique, Hai Xia and Stefan Szeider. *SqueezeBench: Saturation-Resilient Evaluation of Mathematical Capability*.  
+> arXiv:2610.13461, 2026.
+> <https://arxiv.org/abs/2610.13461>
+
+BibTeX citation:
+
+```bibtex
+@misc{manrique2026squeezebenchsaturationresilientevaluationmathematical,
+      title={SqueezeBench: Saturation-Resilient Evaluation of Mathematical Capability}, 
+      author={Pablo Manrique and Hai Xia and Stefan Szeider},
+      year={2026},
+      eprint={2610.13461},
+      archivePrefix={arXiv},
+      primaryClass={cs.AI},
+      url={https://arxiv.org/abs/2610.13461}, 
+}
+```
 
 ## License
 
