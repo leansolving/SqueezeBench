@@ -7,6 +7,14 @@ The second phase, a continuation from the baseline's records with newer models, 
 > **Note.** The prompts and reports here are kept exactly as they were used. The repository has
 > changed since, so they would not apply as written today: some files they cite, such as
 > `docs/DESIGN.md`, no longer exist. Their content is now in `docs/CONTRIBUTING.md`.
+>
+> The reports were written by the agents for their own next session on the same machine, not
+> for a submitter. Some name a parked record directory under `Records/` or files under
+> `.lake/scratch/` that existed only there: `run.sh` deleted every unaccepted version at the
+> end of a session, and the scratch directory was never in the repository. In the runs the
+> agent was its own maintainer and ran `accept` itself; a submitter never does. Read the
+> reports for the mathematics, the literature and the history of each version, not for the
+> workflow.
 
 | file | what it is |
 |---|---|
