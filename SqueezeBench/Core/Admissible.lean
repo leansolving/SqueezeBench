@@ -36,7 +36,8 @@ private partial def reachableConsts (env : Environment) (c : Name) (seen : NameS
 ```
 
 Fails if the declaration is `noncomputable`, or if any listed oracle is reachable from its
-definition. Silent on success, so it can be left in a submission file as a self-check. -/
+definition. Silent on success. Run it from a scratch file outside the record directory: a
+submission's `Def.lean` holds only definitions and its `Proof.lean` allows no `#` commands. -/
 elab "#check_admissible " decl:ident "avoiding" oracles:ident,* : command => do
   let env ← getEnv
   let declName ← liftCoreM <| realizeGlobalConstNoOverload decl

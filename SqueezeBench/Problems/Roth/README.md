@@ -62,7 +62,7 @@ next step is the Szekeres construction — the integers below `3ᵏ` whose base-
 
 > **Behrend cannot be a record as it stands.** `Behrend.roth_lower_bound` is stated over `ℝ`
 > and involves `Real.exp` and `Real.log`, which are noncomputable, while a record must be
-> computable (gate 4). Using it means first exhibiting a computable ℕ-valued function below it
+> computable (gate 5). Using it means first exhibiting a computable ℕ-valued function below it
 > — a rational approximation — and that conversion, not the mathematics, is the work. The same
 > obstacle applies to Ruzsa–Szemerédi, whose Mathlib lower bound routes through this one.
 

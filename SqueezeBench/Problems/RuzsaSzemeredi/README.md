@@ -70,7 +70,7 @@ contributes no edge that lies in no triangle) and a count of its 3-cliques.
 
 > **Mathlib's own lower bound cannot be a record.** `ruzsaSzemerediNumberNat_lower_bound` is
 > stated over `ℝ` and routes through `Behrend.roth_lower_bound`, so it involves `Real.exp` and
-> `Real.log` — noncomputable, while a record must be computable (gate 4). The same obstacle
+> `Real.log` — noncomputable, while a record must be computable (gate 5). The same obstacle
 > applies to `rothNumberNat_le_ruzsaSzemerediNumberNat`, which *is* ℕ-valued
 > (`(2n+1) · r₃(n) ≤ f(6n+3)`) but routes through `rothNumberNat`, an exponential search that
 > would blow the fuel budget. Both are listed as oracles for that reason.

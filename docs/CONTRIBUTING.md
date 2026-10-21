@@ -302,8 +302,9 @@ lake exe squeeze budget-probe SqueezeBench/Problems/<P>/Records/<Dir>/V<k>/Proof
 If someone else lands first, `V<k+1>` is now the open version and `squeeze verify` stops with
 exit code 3 and a `REBASE:` message. Rename your directory to `V<k+1>`. In both files replace
 `V<k>` by `V<k+1>` in the namespace and `V<k-1>` by `V<k>` in every reference to the previous
-record. With Idiom 2 the proofs are unchanged. With Idiom 1, check `patch_improves` again at
-your point.
+record. With Idiom 2, `valid` and `improves` go through unchanged, but the new record may
+already reach your value at the witness: check `strict` and the `witness` in `metadata.toml`
+again. With Idiom 1, check `patch_improves` again at your point.
 
 ## License and outside sources
 
@@ -316,7 +317,8 @@ You may build on other people's work:
   non-commercial, no-derivatives and unlicensed code cannot be accepted.
 - In each file with such code, keep the original copyright notices and add a comment naming
   the source and saying that you changed it. For a license other than Apache-2.0, add a copy
-  to `LICENSES/`. If the source has a `NOTICE` file, copy its notices into `REPORT.md`.
+  to your record directory, for example as `LICENSE-<source>.txt`; the pull request may touch
+  nothing outside it. If the source has a `NOTICE` file, copy its notices into `REPORT.md`.
 - **Data**, such as a table of values, a graph or a cap, may be used with a citation.
 - List every outside source under `## Sources` in `REPORT.md`: the URL pinned to a commit or
   version, the license, and what you took. This includes code an AI system retrieved for you.

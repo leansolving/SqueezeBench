@@ -44,7 +44,9 @@ step "toolchain guard"
 ours=$(tr -d '[:space:]' < lean-toolchain)
 for pkg in Comparator lean4export; do
   theirs=$(tr -d '[:space:]' < ".lake/packages/$pkg/lean-toolchain")
-  [ "$ours" = "$theirs" ] || die "lean-toolchain is $ours but $pkg targets $theirs — bump the Comparator rev in lakefile.toml to the tag matching lean-toolchain, then lake update Comparator"
+  # Maintainers fix a mismatch by bumping the Comparator rev in lakefile.toml to the tag
+  # matching lean-toolchain, then `lake update Comparator`. A submitter should not run that.
+  [ "$ours" = "$theirs" ] || die "lean-toolchain is $ours but $pkg targets $theirs — a pinned tool does not match this toolchain; report it to the maintainers, do not run lake update"
 done
 echo "   all on $ours"
 

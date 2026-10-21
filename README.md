@@ -82,19 +82,22 @@ exists to try out the submission pipeline.
 | a C compiler | `bootstrap` | e.g. `sudo apt install build-essential` |
 | [Rust](https://rustup.rs), which provides `cargo` | `bootstrap` | follow [rustup.rs](https://rustup.rs), or run `curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs \| sh` |
 | Linux with Landlock, not as root | `verify` | check with `grep -w landlock /sys/kernel/security/lsm` |
+| the [GitHub CLI](https://cli.github.com) `gh` | forking and the pull request | follow [cli.github.com](https://cli.github.com), or your system package manager |
 
 
 ### Setup
 
 ```sh
-git clone https://github.com/leansolving/SqueezeBench.git # clone repo
+gh repo fork leansolving/SqueezeBench --clone   # fork and clone; adds `upstream` for this repository
 cd SqueezeBench
 lake exe cache get           # download prebuilt Mathlib
 lake build                   # build the library and all records
 lake exe squeeze bootstrap   # build the verifier tools into .tools/ (needs cargo)
 ```
 
-`bootstrap` is needed once per machine, before `squeeze verify` can run.
+`bootstrap` is needed once per machine, before `squeeze verify` can run. To build and run the
+records without submitting, a plain `git clone` of this repository is enough; `verify` below
+expects the `upstream` remote that the fork command sets up.
 
 ## Contributing a record
 
