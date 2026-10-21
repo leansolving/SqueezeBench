@@ -36,6 +36,12 @@ rather than the term count measures this problem's ground truth.
 - Transfer lemmas: `le_f_of_threeAPFree` (exhibit a 3-AP-free set) and `f_le_self`. `f_mono`
   carries a bound proved at one `n` to every larger one.
 
+> **Behrend cannot be a record as it stands.** `Behrend.roth_lower_bound` is stated over `ℝ`
+> and involves `Real.exp` and `Real.log`, which are noncomputable, while a record must be
+> computable (gate 5). Using it means first exhibiting a computable ℕ-valued function below it
+> — a rational approximation — and that conversion, not the mathematics, is the work. The same
+> obstacle applies to Ruzsa–Szemerédi, whose Mathlib lower bound routes through this one.
+
 ## Seeded records
 
 | direction | record | `n=1` | `n=2` | `n=3` | `n=5` |
@@ -52,23 +58,6 @@ citation in the chain. The lower record is also exact at `n = 3`.
 Neither seed needed a witness construction: the lower record follows from `f 1 = 1` and
 `f 2 = 2` — both settled by the kernel — plus monotonicity.
 
-## Where the next improvement lies
-
-**Both sides are wide open, and the lower side is the interesting one.**
-
-The lower record is constant at `2`, against a truth that grows almost linearly. The classical
-next step is the Szekeres construction — the integers below `3ᵏ` whose base-3 digits avoid `2`
-— giving `2^k ≈ n^{log 2 / log 3} ≈ n^{0.63}`. Beyond that is Behrend.
-
-> **Behrend cannot be a record as it stands.** `Behrend.roth_lower_bound` is stated over `ℝ`
-> and involves `Real.exp` and `Real.log`, which are noncomputable, while a record must be
-> computable (gate 5). Using it means first exhibiting a computable ℕ-valued function below it
-> — a rational approximation — and that conversion, not the mathematics, is the work. The same
-> obstacle applies to Ruzsa–Szemerédi, whose Mathlib lower bound routes through this one.
-
-On the upper side, `n` is the trivial bound; anything better is Roth's theorem or a finite-`n`
-argument, and Bloom–Sisask is far out of reach of formalisation today.
-
 ## Current state
 
 | | |
@@ -76,7 +65,7 @@ argument, and Bloom–Sisask is far out of reach of formalisation today.
 | Well posed | **yes** — total by construction |
 | Lower record | `Records/Lower/V009/` — beats V008 at witness `8000` (trial claude-fable; based on V001, V002, V004, V005, V006, V007, V008, 2026-09-25) |
 | Upper record | `Records/Upper/V007/` — beats V006 at witness `100` (trial claude-fable; based on V002, V003, V004, V005, V006, 2026-09-25) |
-| Live | **yes** — both Challenges open at `V001`; `squeeze audit Roth` accepts both seeds |
+| Live | yes |
 
 ## Record history
 

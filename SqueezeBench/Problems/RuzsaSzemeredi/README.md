@@ -47,6 +47,13 @@ construction — a `Nat.findGreatest` over a `Fintype` — so there is no `Finit
 Transfer lemmas: `le_f_of_locallyLinear` (exhibit a locally linear graph, count its triangles)
 and `f_le_choose_three`. `f_mono` carries a bound at one `n` to every larger one.
 
+> **Mathlib's own lower bound cannot be a record.** `ruzsaSzemerediNumberNat_lower_bound` is
+> stated over `ℝ` and routes through `Behrend.roth_lower_bound`, so it involves `Real.exp` and
+> `Real.log` — noncomputable, while a record must be computable (gate 5). The same obstacle
+> applies to `rothNumberNat_le_ruzsaSzemerediNumberNat`, which *is* ℕ-valued
+> (`(2n+1) · r₃(n) ≤ f(6n+3)`) but routes through `rothNumberNat`, an exponential search that
+> would blow the fuel budget. Both are listed as oracles for that reason.
+
 ## Seeded records
 
 | direction | record | `n=3` | `n=6` | `n=9` |
@@ -60,24 +67,6 @@ determines it. After that the gap opens immediately and widely.
 The lower seed is `K₃`, which is locally linear with one triangle. Both facts about it are
 concrete, so `decide` settles them; monotonicity does the rest.
 
-## Where the next improvement lies
-
-**The lower side, and the first step is worth doing properly.** A disjoint union of `⌊n/3⌋`
-triangles is locally linear — each edge lies in exactly one triangle — giving `f(n) ≥ ⌊n/3⌋`.
-That is the natural seed and the obvious first submission; it needs a graph on `Fin n` whose
-blocks are the complete ones (`x/3 = y/3` and `x/3 < n/3`, so a trailing partial block
-contributes no edge that lies in no triangle) and a count of its 3-cliques.
-
-> **Mathlib's own lower bound cannot be a record.** `ruzsaSzemerediNumberNat_lower_bound` is
-> stated over `ℝ` and routes through `Behrend.roth_lower_bound`, so it involves `Real.exp` and
-> `Real.log` — noncomputable, while a record must be computable (gate 5). The same obstacle
-> applies to `rothNumberNat_le_ruzsaSzemerediNumberNat`, which *is* ℕ-valued
-> (`(2n+1) · r₃(n) ≤ f(6n+3)`) but routes through `rothNumberNat`, an exponential search that
-> would blow the fuel budget. Both are listed as oracles for that reason.
-
-On the upper side, `C(n,3)` is trivial; the real bound is Ruzsa–Szemerédi's `o(n²)` via the
-triangle removal lemma, which is far out of formalisation reach today.
-
 ## Current state
 
 | | |
@@ -85,7 +74,7 @@ triangle removal lemma, which is far out of formalisation reach today.
 | Well posed | **yes** — total by construction |
 | Lower record | `Records/Lower/V009/` — beats V008 at witness `15` (Pablo Manrique; based on V007, V008, 2026-10-02) |
 | Upper record | `Records/Upper/V008/` — beats V007 at witness `40` (trial claude-fable; based on V001, V002, V003, V004, V005, V006, V007, 2026-09-25) |
-| Live | **yes** — both Challenges open at `V001` |
+| Live | yes |
 
 ## Record history
 

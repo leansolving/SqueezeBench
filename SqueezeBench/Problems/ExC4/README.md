@@ -67,15 +67,6 @@ bounds.
 | lower | `0` | the empty graph |
 | upper | `C(n, 2)` | `f_le_choose_two` |
 
-## Where the next improvement lies
-
-- **lower.** The star on `n` vertices gives `n − 1` and is `C₄`-free — two leaves share only the
-  centre. The first real improvement is the friendship graph, `⌊3(n−1)/2⌋` edges from triangles
-  sharing one vertex. Beyond that lies the polarity graph, which is asymptotically optimal.
-- **upper.** The trivial bound is `C(n, 2)`. The first real improvement is the cherry count: each
-  pair of vertices is the base of at most one cherry, so `Σ_v C(d(v), 2) ≤ C(n, 2)`, which gives
-  Reiman's `n(1 + √(4n−3))/4` and drops the record from order `n²` to order `n^{3/2}`.
-
 ## Current state
 
 | | |
@@ -83,7 +74,7 @@ bounds.
 | Well posed | **yes** — total by construction |
 | Lower record | `Records/Lower/V008/` — beats V007 at witness `109` (trial claude-fable; based on V006, V007, 2026-09-24) |
 | Upper record | `Records/Upper/V005/` — beats V004 at witness `15` (trial claude-fable; based on V001, V003, V004, 2026-09-25) |
-| Live | **yes** — both Challenges open at `V001` |
+| Live | yes |
 
 ## Record history
 

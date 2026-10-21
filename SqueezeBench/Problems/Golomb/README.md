@@ -88,13 +88,6 @@ What the pair brackets, against the known values above:
 Both records are exact at `m = 1, 2, 3`; the lower record is also exact at `m = 4`, and the
 upper record at `m = 5` and `m = 6` (the two patches).
 
-## Where the next improvement lies
-
-The upper side. The literature's `m² − m` needs the Singer difference-set construction and
-only applies when `m − 1` is a prime power, so it is not a total bound; the Erdős–Turán
-construction `{2pk + (k² mod p)}` gives a total `O(m²)` bound but needs a prime between `m`
-and `2m`, so it routes through Bertrand's postulate (`Nat.exists_prime_lt_and_le_two_mul`).
-
 ## Current state
 
 | | |

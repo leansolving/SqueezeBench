@@ -205,7 +205,7 @@ lake exe squeeze audit <P>
 
 Follow CapSet's headings in order: statement and `nMin`; **Known values** (marked *reporting
 only, never a source of theorems*, with the OEIS id and any offset discrepancy called out);
-**Formalisation status**; **Seeded records**; **Where the next improvement lies**; and
+**Formalisation status**; **Seeded records**; and
 **Current state** with a `| Lower record | … |` and `| Upper record | … |` row, which
 `lake exe squeeze accept` rewrites on each acceptance. The **Record history** table is created by
 `accept` on the first accepted version after the seed.

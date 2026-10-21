@@ -85,28 +85,6 @@ bounds.
 | lower | `0` | the empty graph |
 | upper | `C(2ⁿ, 2)` | `f_le_card_edgeFinset_hypercube` and `card_edgeFinset_le_card_choose_two` |
 
-## Where the next improvement lies
-
-Both elementary bounds below are close to the literature's leading term.
-
-- **lower.** The parity construction gives `½ · n2ⁿ⁻¹` for `n ≥ 2`; at `n = 1` it keeps the
-  single edge. Keep the edge `{x, x with bit i
-  flipped}` when the bits of `x` other than `i` have even sum. In every square exactly one of
-  the two edges in each direction is kept, so no square survives whole. This is Erdős's
-  conjectured leading term. Beating it at small `n` needs better constructions; beating it
-  asymptotically is Guan's construction, then Brass–Harborth–Nienborg.
-- **upper.** Two elementary bounds are available.
-  - *Double count:* every square needs a deleted edge, and each edge lies in `n − 1` squares.
-    So at least `n2ⁿ⁻³` edges go, giving `f(n) ≤ ¾ · n2ⁿ⁻¹`. This is exact at `n = 2, 3, 4`
-    and first loses at `n = 5` (60 against 56).
-  - *Averaging over subcubes:* every edge of `Qₙ` lies in exactly `n − 1` of the `2n`
-    subcubes isomorphic to `Qₙ₋₁`, so `f(n) ≤ ⌊2n · f(n−1)/(n−1)⌋` (A245762, after Balogh et
-    al.). Chaining it from the `¾` bound only reproduces `¾`; it bites once a small value
-    below `¾` is proved. From `f(5) = 56` it gives `f(6) ≤ 134`, and from `f(6) = 132` it gives
-    `f(7) ≤ 308`, so the real work is proving those base values.
-
-  The flag-algebra bounds are out of formalisation reach today.
-
 ## Current state
 
 | | |
@@ -114,7 +92,7 @@ Both elementary bounds below are close to the literature's leading term.
 | Well posed | **yes** — total by construction |
 | Lower record | `Records/Lower/V007/` — beats V006 at witness `7` (trial claude-fable; based on V006, 2026-09-25) |
 | Upper record | `Records/Upper/V007/` — beats V006 at witness `12` (trial claude-fable; based on V002, V005, V006, 2026-09-25) |
-| Live | **yes** — both Challenges open at `V001` |
+| Live | yes |
 
 ## Record history
 

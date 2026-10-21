@@ -80,14 +80,6 @@ What the pair brackets, against the known values above:
 
 Both records are exact at `n = 1`, and the lower record is exact at `n = 2`.
 
-## Where the next improvement lies
-
-Both sides are exponentially loose against the true growth rate, which lies between
-`2.2202` and `2.7551`. The `2.2202ⁿ` lower bound is out of reach as a seed — it comes from
-a FunSearch admissible set in `A(24, 17)` of size 237984 — and Ellenberg–Gijswijt needs the
-slice rank method, which Mathlib does not have. Meshulam's `O(3^n/n)` is the realistic next
-upper step.
-
 ## Current state
 
 | | |

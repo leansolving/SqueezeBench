@@ -78,16 +78,6 @@ bounds.
 | lower | `0` | the empty graph |
 | upper | `C(n, 2)` | `f_le_choose_two` |
 
-## Where the next improvement lies
-
-- **lower.** The star on `n` vertices gives `n − 1` and has girth ≥ 5 — it is triangle-free, and
-  two leaves share only the centre. Real improvements are explicit graphs: the Petersen graph at
-  `n = 10`, induced subgraphs of Hoffman–Singleton, and in general the incidence graph of a
-  projective plane, which is asymptotically the best known.
-- **upper.** The trivial bound is `C(n, 2)`. The first real improvement is the Moore count above,
-  giving `(n/2)√(n−1)` and dropping the record from order `n²` to order `n^{3/2}`. Nothing
-  better is known in general — improving the constant `½` here would settle Erdős #573.
-
 ## Current state
 
 | | |
@@ -95,7 +85,7 @@ bounds.
 | Well posed | **yes** — total by construction |
 | Lower record | `Records/Lower/V011/` — beats V010 at witness `50` (trial claude-fable; based on V008, V010, 2026-09-25) |
 | Upper record | `Records/Upper/V006/` — beats V005 at witness `410` (trial claude-fable; based on V001, V002, V003, V004, V005, 2026-09-25) |
-| Live | **yes** — both Challenges open at `V001` |
+| Live | yes |
 
 ## Record history
 

@@ -66,18 +66,6 @@ evens and odds, written on `Fin N` so that no re-indexing is needed. It is trian
 among any three vertices two share a parity, and a clique in its complement has constant parity,
 so `x ↦ x / 2` bounds it by `k−1`.
 
-## Where the next improvement lies
-
-**The lower side, and the gap widens fast**: `2k−1` against a truth of `Θ(k²/log k)`, so by
-`k = 9` the seed gives `17` against `36`. The literature route is Kim's `Ω(k²/log k)`, a genuine
-research formalisation; the intermediate `R(3,k) ≥ c·(k/log k)^{3/2}` constructions are the
-realistic next step, and a point patch at a single `k` from a known value is admissible and much
-cheaper.
-
-On the upper side, `C(k+1,2) ≈ k²/2` against `~k²/log k` means improving it is the
-Ajtai–Komlós–Szemerédi argument or an explicit weakening of it. But note the upper seed is
-already **exact at `k = 2` and `k = 3`**, so the first upper improvement must target `k ≥ 4`.
-
 ## Current state
 
 | | |
@@ -85,7 +73,7 @@ already **exact at `k = 2` and `k = 3`**, so the first upper improvement must ta
 | Well posed | **yes** — `wellPosed`, from `Ramsey.forces_exists` |
 | Lower record | `Records/Lower/V007/` — beats V006 at witness `1683` (trial claude-fable; based on V005, V006, 2026-09-25) |
 | Upper record | `Records/Upper/V004/` — beats V003 at witness `12` (trial claude-fable; based on V002, V003, 2026-09-24) |
-| Live | **yes** — both Challenges open at `V001`; `squeeze audit Ramsey3` accepts both seeds |
+| Live | yes |
 
 ## Record history
 

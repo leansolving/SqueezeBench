@@ -89,13 +89,6 @@ What the pair brackets, against the known values above:
 
 Both records are exact at `k = 1, 2`, and the lower record is exact at `k = 3`.
 
-## Where the next improvement lies
-
-The upper side. Sharpening the pigeonhole recurrence to `R_k(3) ≤ k(R_{k-1}(3) − 1) + 2`
-and solving it gives `R_k(3) ≤ ⌊e·k!⌋ + 1`, hence `S(k) ≤ ⌊e·k!⌋ − 1`, computable as
-`2·k! − 1 + ∑_{i=2}^{k} k!/i!`. The graph argument is already in place; only the arithmetic
-changes.
-
 ## Current state
 
 | | |

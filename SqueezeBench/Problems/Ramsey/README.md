@@ -85,18 +85,6 @@ What the pair currently brackets, against the known values above:
 
 Both records are exact at `n = 2`, and the upper record is exact at `n = 3`.
 
-## Where the next improvement lies
-
-The lower record is the weak side by a wide margin: it is polynomial where the truth is
-exponential. Erdős' `R(n,n) > 2^(n/2)` (1947) is the standing target, and the counting form
-of it avoids probability entirely — it needs only that `C(N,n) · 2 < 2^C(n,2)` implies some
-graph on `N` vertices is good. The Mathlib handles are
-`SimpleGraph.card_topEdgeLabeling` (there are `2^C(N,2)` two-colourings of `K_N`) and
-`Finset.card_powersetCard`.
-
-On the upper side the next classical step is Thomason's polynomial-factor improvement,
-which is much heavier — it needs a quasirandomness development that Mathlib does not have.
-
 ## Current state
 
 | | |
