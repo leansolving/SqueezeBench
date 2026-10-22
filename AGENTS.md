@@ -53,7 +53,7 @@ CONTRIBUTING, *Rules your submission must satisfy*, is the full list. The ones a
 - No `sorry`, `admit`, `axiom`, `native_decide`, `bv_decide` or `bv_check`. Axioms only from `propext`, `Classical.choice`, `Quot.sound`.
 - `Def.lean` holds only `def` and `abbrev`. `record` is computable, never mentions `f` or an oracle, uses ℕ arithmetic and is cheap for `decide +kernel` at every `n` from `nMin` to `fuel-range-max`. A lower record is `0` below `nMin` (use `pin`).
 - `Proof.lean` stays within 200000 heartbeats per declaration and for the whole file, with no `set_option` beyond `linter.*` and `pp.*` and no metaprogramming. Proofs reason; computation may only check data the record provides, never search.
-- Outside code only under Apache-2.0, MIT or BSD, listed under `## Sources` in `REPORT.md`. If a license file would have to go into `LICENSES/`, ask the human first: that is outside your directory.
+- Outside code only under Apache-2.0, MIT or BSD, listed under `## Sources` in `REPORT.md`. A copy of a license other than Apache-2.0 goes into your record directory, never into `LICENSES/`: that is outside your directory.
 
 ## Ask the human
 
