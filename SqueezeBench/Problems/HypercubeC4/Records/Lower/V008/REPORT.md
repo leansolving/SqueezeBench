@@ -37,7 +37,7 @@ and the popcounts sum to `2·682` (`M8_count`, by a structural recursion `pc` on
 
 ## How the proofs were obtained
 
-Written by the submitter directly in Lean 4. The reusable part (`code`, `decode`, `testBit_code`,
+Written by Fable 5.1 directly in Lean 4. The reusable part (`code`, `decode`, `testBit_code`,
 `code_flip`, `card_code`, `pc`, `card_testBit_range`, `mgraph`, `mgraph_not_hasSquare`,
 `mgraph_two_mul_card_edges`) turns any family of symmetric bitmasks into a subgraph of the
 cube with a square-freeness criterion and an edge count in terms of `testBit`, so that later
