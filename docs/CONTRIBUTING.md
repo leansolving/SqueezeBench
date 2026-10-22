@@ -47,6 +47,8 @@ SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>/
 A worked example is `SqueezeBench/Problems/Tutorial/Records/Lower/V002/` (patch idiom);
 `Fixtures/Tutorial/Bob/` shows the `maxWith` idiom.
 
+> **Note:** The rules tightened while the first records were being produced: records accepted before a rule existed stay as accepted, so many have no `REPORT.md`, or sources listed outside a `## Sources` heading. Your submission follows the rules as written here, not the record you copy from.
+
 ## Submitting, step by step
 
 `<Problem>` is the problem, `<Direction>` is `Lower` or `Upper`, `V<k>` is the open version (the
