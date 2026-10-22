@@ -90,7 +90,7 @@ bounds.
 | | |
 |---|---|
 | Well posed | **yes** — total by construction |
-| Lower record | `Records/Lower/V007/` — beats V006 at witness `7` (trial claude-fable; based on V006, 2026-09-25) |
+| Lower record | `Records/Lower/V008/` — beats V007 at witness `8` (SB maintainers; based on V001, V005, V007, 2026-10-22) |
 | Upper record | `Records/Upper/V007/` — beats V006 at witness `12` (trial claude-fable; based on V002, V005, V006, 2026-09-25) |
 | Live | yes |
 
@@ -122,3 +122,4 @@ The author is the `name` in the record's `metadata.toml`.
 | V005 | 2026-09-24 | baseline claude-opus-5; based on V001, V004 | 6 | 112 → 120 |
 | V006 | 2026-09-25 | trial claude-fable; based on V001, V005 | 16 | 286720 → 327680 |
 | V007 | 2026-09-25 | trial claude-fable; based on V006 | 7 | 288 → 304 |
+| V008 | 2026-10-22 | SB maintainers; based on V001, V005, V007 | 8 | 672 → 682 |
