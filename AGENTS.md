@@ -15,9 +15,9 @@ Each problem is a function `f : ℕ → ℕ` from extremal combinatorics and has
 5. The open Challenge and the current record `Records/<Direction>/V<k-1>/`, with its `REPORT.md`.
 6. `evaluation/runs/<Problem>-<Direction>/REPORT.md`: notes from the agents of our baseline runs on this track, with the literature, each version and what the next improvement would take. Often the fastest way to see where the record stands.
 7. `SqueezeBench/Core/`: `BoundFn`, the obligations and the helpers `pin`, `patch`, `maxWith`, `minWith`.
-8. A recent accepted record of your track as the template for all four files. Follow the current rules where an older record does not, for example a `## Sources` heading in `REPORT.md`. The Tutorial record `SqueezeBench/Problems/Tutorial/Records/Lower/V001/` shows the `patch` idiom in its simplest form but is older than the current format: it has no `REPORT.md` and no `based-on`.
+8. A recent accepted record of your track as the template for all four files. Follow the current rules where an older record does not: many records predate them and have no `REPORT.md`, or no `## Sources` heading in it. The Tutorial record `SqueezeBench/Problems/Tutorial/Records/Lower/V002/` shows the `patch` idiom in its simplest form and follows the current format.
 
-**Stale material.** Some problem READMEs were written at the seed: their "Live" row names an old open version and their "next improvement" section describes the seed record. The highest Challenge file and the current record are what count. The evaluation reports were written during our runs: they can mention unaccepted record directories and scratch files under `.lake/` that are not in the repository, and steps such as `squeeze accept` that only maintainers run. Use them for the mathematics and the literature, not for the workflow.
+**The evaluation reports** are kept as the agents wrote them during our runs: they can mention unaccepted record directories and scratch files under `.lake/` that are not in the repository, and steps such as `squeeze accept` that only maintainers run. Use them for the mathematics and the literature, not for the workflow.
 
 ## Choosing what to do
 

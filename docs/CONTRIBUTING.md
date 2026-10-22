@@ -44,7 +44,7 @@ SqueezeBench/Problems/<Problem>/Records/<Direction>/V<k>/
 └── REPORT.md         -- how you obtained the record, your setup and your sources
 ```
 
-A worked example is `SqueezeBench/Problems/Tutorial/Records/Lower/V001/` (patch idiom);
+A worked example is `SqueezeBench/Problems/Tutorial/Records/Lower/V002/` (patch idiom);
 `Fixtures/Tutorial/Bob/` shows the `maxWith` idiom.
 
 ## Submitting, step by step
