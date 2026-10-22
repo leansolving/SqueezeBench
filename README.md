@@ -64,7 +64,7 @@ record history.
 | | | upper | [V005](SqueezeBench/Problems/ExC4/Records/Upper/V005) | Baseline (by SB team) | claude-fable (autonomous) |
 | [`ex(n; {C₃,C₄})`](SqueezeBench/Problems/ExGirthFive) | most edges in an `n`-vertex graph of girth at least 5 | lower | [V011](SqueezeBench/Problems/ExGirthFive/Records/Lower/V011) | Baseline (by SB team) | claude-fable (autonomous) |
 | | | upper | [V006](SqueezeBench/Problems/ExGirthFive/Records/Upper/V006) | Baseline (by SB team) | claude-fable (autonomous) |
-| [`ex(Qₙ, C₄)`](SqueezeBench/Problems/HypercubeC4) | most edges in a `C₄`-free subgraph of the `n`-cube | lower | [V007](SqueezeBench/Problems/HypercubeC4/Records/Lower/V007) | Baseline (by SB team) | claude-fable (autonomous) |
+| [`ex(Qₙ, C₄)`](SqueezeBench/Problems/HypercubeC4) | most edges in a `C₄`-free subgraph of the `n`-cube | lower | [V008](SqueezeBench/Problems/HypercubeC4/Records/Lower/V008) | SB maintainers | claude-fable (trial) |
 | | | upper | [V007](SqueezeBench/Problems/HypercubeC4/Records/Upper/V007) | Baseline (by SB team) | claude-fable (autonomous) |
 
 Each problem's README has the definition, the known values, the current records and the full
