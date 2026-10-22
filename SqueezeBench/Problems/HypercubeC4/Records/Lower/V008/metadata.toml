@@ -1,0 +1,3 @@
+name    = "SB maintainers"
+witness = 8   # uncomment: the n at which your record beats the previous one
+based-on = ["V001", "V005", "V007"]
